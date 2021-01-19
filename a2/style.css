@@ -120,14 +120,35 @@ article {
     border-style: none none solid none ;
 }
 
-a {
+.articleHeader a {
     text-align: center;
 	font-size: 25px;
 	font-family: sans-serif;
-    margin: 0;
-	padding: 0 0 5px 0;
+    margin: 20px 0;
+	padding: 5px;
+    color: #000A;
+    border-style: ridge;
+    text-decoration: none;
 }
 
+.articleHeader a:hover {
+    color: #FEC;
+	background-color: #0003;
+	text-shadow: 0 0 5px #fff;
+}
+
+.previous {
+    float: left;
+}
+
+.next {
+    float: right;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+    
 .letter p {
 	font-family: cursive; /* specify font*/
     background-color: #EC9;
@@ -214,8 +235,4 @@ footer {
 	margin: 0 0 50px 0;
     padding: 10px 0 0 20px;
 	background-image: linear-gradient(#FDA, #B97); /*last colour needs to match colour for body and .header;*/
-}
-
-html {
-    scroll-behavior: smooth;
 }
