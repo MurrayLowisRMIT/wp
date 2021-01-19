@@ -2,10 +2,9 @@ h1 {
 	text-align: center;
 	font-size: 60px;
 	font-family: sans-serif;
-    height: 200px;
-    margin: 0;
-    !padding: 0;
-    overflow: hidden;
+    max-width: 1400px;
+    margin: 0 0 0 140px;
+    padding: 20px 0;
 }
 
 h2 {
@@ -35,38 +34,35 @@ p {
 }
 
 img {
-    position: relative;
+    !position: absolute;
     width: 100px;
     margin: 20px 20px;
     float: left;
 }
 
 body {
+	width: 90%;
+    min-height: 600px;
 	margin: 0 0 0 5%;
 	padding: 0;
-	width: 90%;
 	background-color: #B97; /*!this needs to match colour for header and footer;*/
 }
 
 header {
-    position: fixed;
-    vertical-align: middle;
     top: 0;
     background-color: #FDA;
-    width: 90%;
-    height: 200px;
-    z-index: 1;
+    width: 100%;
+    overflow: auto;
 }
 
 nav {
     position: sticky;
-	top: 200px;
+	top: 50px;
 	list-style-type: none;
     width: 200px;
 	margin: 0;
     padding: 0;
 	float: left;
-    z-index: 1;
 }
 
 nav ul {
@@ -98,11 +94,11 @@ nav a {
 nav li:hover {
     color: #FEC;
 	background-color: #0003;
-	text-shadow: 0 0 0.5vw #fff;
+	text-shadow: 0 0 5px #fff;
 }
 
 main {
-    padding: 200px 0 30px 200px;
+    padding: 0 0 30px 200px;
     background-color: #FDA;
 }
 
@@ -111,6 +107,7 @@ article {
 	margin: 0 5% 0 5%;
     background-color: inherit;
     border-style: none none solid none;
+    max-width: 1200px;
 }
 
 .letter p {
@@ -130,14 +127,45 @@ article {
 
 .articleHeader {
 	position: sticky;
-    background-color: #FDA;
-	height: auto; /* set this correctly*/
+    background-color: inherit;
 	width: 100%;
 	padding: 0;
-	top: 200px;
+	top: 0;
 	padding: 0;
 	margin: 0;
     border-style: none none solid none ;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 80px 30px 300px;
+    grid-gap: 10px;
+}
+
+form input {
+    grid-column: 2 / span 2;
+    overflow: scroll;
+}
+
+.messageField {
+    height: 200px;
+}
+
+.checkBox {
+    grid-column: 2;
+    text-align: left;
+}
+
+.checkBoxLabel {
+    grid-column: 3;
+    text-align: left;
+}
+
+label {
+	text-align: right;
+    font-family: serif;
+    color: #000A;
+	font-size: 20px;
 }
 
 footer {
