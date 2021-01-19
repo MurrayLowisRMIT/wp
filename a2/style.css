@@ -27,10 +27,15 @@ p {
 	font-family: serif;
     color: #000A;
 	font-size: 20px;
-	padding: 5px 10px;
+	padding: 5px 1%;
 	margin: 0;
     background-color: #EC9;
     border-style: none double;
+}
+
+img {
+    width: 200px;
+    margin: 20px 20px;
 }
 
 body {
@@ -38,7 +43,9 @@ body {
     min-height: 600px;
 	margin: 0 0 0 5%;
 	padding: 0;
-	background-color: #B97; /*!this needs to match colour for header and footer;*/
+    /*https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
+    background-image: url('../../media/Rough cotton.png');
+	background-color: #B97;
 }
 
 header {
@@ -46,12 +53,6 @@ header {
     background-color: #FDA;
     width: 100%;
     overflow: auto;
-}
-
-header img {
-    width: 100px;
-    margin: 20px 20px;
-    float: left;
 }
 
 nav {
@@ -125,9 +126,11 @@ article {
 	font-size: 25px;
 	font-family: sans-serif;
     margin: 20px 0;
-	padding: 5px;
-    color: #000A;
+	padding: 0.5%;
+    color: #000;
     border-style: ridge;
+    border-color: #000A;
+    border-radius: 10px;
     text-decoration: none;
 }
 
@@ -137,11 +140,11 @@ article {
 	text-shadow: 0 0 5px #fff;
 }
 
-.previous {
+.floatLeft {
     float: left;
 }
 
-.next {
+.floatRight {
     float: right;
 }
 
@@ -150,18 +153,33 @@ html {
 }
     
 .letter p {
-	font-family: cursive; /* specify font*/
-    background-color: #EC9;
+	font-family: cursive;
+    /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
+    background-image: url('../../media/Paper texture.png');
 }
 
 .postcard p {
-	font-family: cursive; /* specify font*/
-    background-color: #EC9;
+	font-family: cursive;
+    /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
+    background-image: url('../../media/Paper texture.png');
 }
 
 .foreword p {
+    color: #000;
     background-color: #FDA;
     border-style: none;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
 }
 
 .parallax {
@@ -234,5 +252,5 @@ footer {
 	height: 80px;
 	margin: 0 0 50px 0;
     padding: 10px 0 0 20px;
-	background-image: linear-gradient(#FDA, #B97); /*last colour needs to match colour for body and .header;*/
+	background-image: linear-gradient(#FDA, #0000);
 }
