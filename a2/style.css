@@ -33,13 +33,6 @@ p {
     border-style: none double;
 }
 
-img {
-    !position: absolute;
-    width: 100px;
-    margin: 20px 20px;
-    float: left;
-}
-
 body {
 	width: 90%;
     min-height: 600px;
@@ -53,6 +46,12 @@ header {
     background-color: #FDA;
     width: 100%;
     overflow: auto;
+}
+
+header img {
+    width: 100px;
+    margin: 20px 20px;
+    float: left;
 }
 
 nav {
@@ -104,10 +103,29 @@ main {
 
 article {
     padding: 0;
-	margin: 0 5% 0 5%;
+	margin: 0 5%;
     background-color: inherit;
     border-style: none none solid none;
     max-width: 1200px;
+}
+
+.articleHeader {
+	position: sticky;
+    background-color: inherit;
+	width: 100%;
+	padding: 0;
+	top: 0;
+	padding: 0;
+	margin: 0;
+    border-style: none none solid none ;
+}
+
+a {
+    text-align: center;
+	font-size: 25px;
+	font-family: sans-serif;
+    margin: 0;
+	padding: 0 0 5px 0;
 }
 
 .letter p {
@@ -125,26 +143,49 @@ article {
     border-style: none;
 }
 
-.articleHeader {
-	position: sticky;
-    background-color: inherit;
-	width: 100%;
-	padding: 0;
-	top: 0;
-	padding: 0;
-	margin: 0;
-    border-style: none none solid none ;
+.parallax {
+    min-height: 500px;
+    background-attachment:fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-style: none double;
+}
+
+.gallipoliLanding{
+    /*https://www.history.com/news/8-things-you-may-not-know-about-the-gallipoli-campaign*/
+    background-image: url('../../media/Gallipoli landing.png');
+}
+
+.gallipoli{
+    /*https://www.history.com/news/7-brilliant-military-retreats*/
+    background-image: url('../../media/Gallipoli.png');
+}
+
+.sommeTrenches{
+    /*https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    background-image: url('../../media/Battle of Somme trenches.png');
+}
+
+.sommeMap{
+    /*https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    background-image: url('../../media/Battle of Somme map.png');
 }
 
 form {
+    margin: 0 5%;
     display: grid;
-    grid-template-columns: 80px 30px 300px;
+    grid-template-columns: 80px 20px 300px;
     grid-gap: 10px;
+    align-content: center;
 }
 
 form input {
     grid-column: 2 / span 2;
-    overflow: scroll;
+    font-family: serif;
+    color: #000;
+    font-size: 20px;
+    overflow: auto;
 }
 
 .messageField {
@@ -173,4 +214,8 @@ footer {
 	margin: 0 0 50px 0;
     padding: 10px 0 0 20px;
 	background-image: linear-gradient(#FDA, #B97); /*last colour needs to match colour for body and .header;*/
+}
+
+html {
+    scroll-behavior: smooth;
 }
