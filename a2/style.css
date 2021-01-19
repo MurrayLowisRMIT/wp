@@ -1,181 +1,148 @@
-body {
-	margin: 0;
-	padding: 0 5%;
-	width: 90%;
-	background-color: #FDA; /*!this needs to match colour for .header and div.footerSpacer;*/
-}
-
 h1 {
 	text-align: center;
-	margin: auto;
 	font-size: 60px;
 	font-family: sans-serif;
-	padding: 50px 0;
+    height: 200px;
+    margin: 0;
+    !padding: 0;
+    overflow: hidden;
 }
 
 h2 {
 	text-align: center;
 	font-size: 40px;
 	font-family: sans-serif;
-	margin: 0 30%;
-	padding: 20px 3% 10px 3%;
+    margin: 0;
+	padding: 10px 0;
 }
 
 h3 {
 	text-align: center;
 	font-size: 25px;
-	margin: 0 30%;
 	font-family: sans-serif;
-	padding: 0 0 15px 0;
-}
-
-h4 {
-	text-align: center;
-	font-size: 20px;
-	margin: 0 30%;
-	font-family: sans-serif;
-	padding: 0 0 15px 0;
+    margin: 0;
+	padding: 0 0 5px 0;
 }
 
 p {
-	color: #0008;
+	font-family: serif;
+    color: #000A;
 	font-size: 20px;
-	font-family: sans-serif;
-	padding: 0 0 20px 0;
-	margin: 0 30%;
+	padding: 5px 10px;
+	margin: 0;
+    background-color: #EC9;
+    border-style: none double;
 }
 
-.emphasis {
-	color: #3338;
-	padding: 0 3% 20px 6%;
-	margin: 0 30%;
+img {
+    position: relative;
+    width: 100px;
+    margin: 20px 20px;
+    float: left;
 }
 
-.header {
-	position: sticky;
-	background-color: #333; /*!this needs to match colour for body and div.footerSpacer;*/
-	height: 3vw;
-	width: 100%;
+body {
+	margin: 0 0 0 5%;
 	padding: 0;
-	top: 0;
+	width: 90%;
+	background-color: #B97; /*!this needs to match colour for header and footer;*/
+}
+
+header {
+    position: fixed;
+    vertical-align: middle;
+    top: 0;
+    background-color: #FDA;
+    width: 90%;
+    height: 200px;
+    z-index: 1;
+}
+
+nav {
+    position: sticky;
+	top: 200px;
+	list-style-type: none;
+    width: 200px;
+	margin: 0;
+    padding: 0;
+	float: left;
+    z-index: 1;
 }
 
 nav ul {
-	list-style-type: none;
 	padding: 0;
 	margin: 0;
 }
 
-div.header a {
-	font-size: 1vw;
-	font-weight: bold;
-	font-family: sans-serif;
-	text-decoration: none;
-	text-shadow: 0 0 0.5vw #fff;
-	text-align: center;
-	background-color: #888;
-	border-radius: 1vw 1vw 0 0;
-	width: 12.5%;
-	height: 1.3vw;
-	padding: 1vw 0 0.7vw 0;
-	float: left;
-	color: #600060;
-}
-
-.header a:hover {
-	background-image: linear-gradient(#90009030, #0000);
-}
-
-.header a.active {
-	background-color: #ddd;
-}
-
-.contents {
-	min-height: 700px;
-	overflow: auto;
-}
-
-.inLine {
-	display: block;
-	max-width: 40%;
-	margin: auto;
-	padding: 0 0 20px 0;
-}
-
-.side {
-	display: block;
-	width: 26%;
-	padding: 0;
-	margin: 0 2%;
-}
-
-.side img {
-	display: block;
-	margin: auto;
-	max-width: 100%;
-}
-
-.side p {
-	text-align: center;
-	width: 90%;
-	margin: auto;
-	font-weight: bold;
-}
-
-.right {
-	float: right;
-}
-
-.left {
-	float: left;
-}
-
-.gallery {
-	width: 33.333333%;
-	float: left;
-	margin: 20px 0;
-}
-
-.gallery img {
-	display: block;
-	margin: auto;
-	height: 250px;
-}
-
-.gallery h2 {
-	margin: 0;
-	padding: 0;
-}
-
-ul {
-	list-style-type: none;
-	padding: 0;
-	margin: 0 0 0 3%;
-}
-
-table {
-	width: 70%;
-	padding: 0 0 20px 0;
-	margin: 0 15%;
-}
-
-tr {
-	width: 70%;
+nav li {
 	font-size: 20px;
+	font-weight: bold;
 	font-family: sans-serif;
+	text-align: left;
+    padding: 10px;
+	color: #653;
+    overflow: auto;
 }
 
-td.data {
-	color: #0008;
+nav li li {
+	font-size: 18px;
+	padding: 7px;
 }
 
-iframe {
-	width: 1000px;
-	height: 562px;
+nav a {
+	text-decoration: none;
+    display: block;
+	color: #653;
+}
+
+nav li:hover {
+    color: #FEC;
+	background-color: #0003;
+	text-shadow: 0 0 0.5vw #fff;
+}
+
+main {
+    padding: 200px 0 30px 200px;
+    background-color: #FDA;
+}
+
+article {
+    padding: 0;
+	margin: 0 5% 0 5%;
+    background-color: inherit;
+    border-style: none none solid none;
+}
+
+.letter p {
+	font-family: cursive; /* specify font*/
+    background-color: #EC9;
+}
+
+.postcard p {
+	font-family: cursive; /* specify font*/
+    background-color: #EC9;
+}
+
+.foreword p {
+    background-color: #FDA;
+    border-style: none;
+}
+
+.articleHeader {
+	position: sticky;
+    background-color: #FDA;
+	height: auto; /* set this correctly*/
+	width: 100%;
+	padding: 0;
+	top: 200px;
+	padding: 0;
+	margin: 0;
+    border-style: none none solid none ;
 }
 
 footer {
-	height: 250px;
+	height: 80px;
 	margin: 0 0 50px 0;
-	background-image: linear-gradient(#0000, #333); /*last colour needs to match colour for body and .header;*/
+    padding: 10px 0 0 20px;
+	background-image: linear-gradient(#FDA, #B97); /*last colour needs to match colour for body and .header;*/
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Assignment 2</title>
+        <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
+        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?= filemtime("style.css"); ?>">
+        <script type="text/javascript" src="tools.js"></script>
+        <script src='../wireframe.js'></script>
+    </head>
+
+    <body>
+        <header>
+            <H1>ANZAC Douglas Raymond Baker - Letters Home</H1>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a href="draftindex.html">FOREWORD</a>
+                <li><a href="draftLetters.html">LETTERS &AMP; POSTCARDS</a>
+                <li><a class="active">CONTACT ME</a>
+            </ul>
+        </nav>
+
+        <main>
+        </main>
+
+        <footer>
+            <div>&copy;<script>
+            document.write(new Date().getFullYear());
+            </script> Murray Lowis, S3862651. Last modified <?= date ("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.</div>
+            <div>Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.</div>
+            <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
+        </footer>
+
+    </body>
+</html>
