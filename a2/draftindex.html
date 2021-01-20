@@ -3,44 +3,74 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="author" content="Murray Lowis">
         <title>ANZAC Douglas Raymond Baker</title>
         <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
-        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css"> <!-- fix this later------------->
+        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css"> <!-- fix this later--------------------------------------------------------------------------------------------------->
+        <link rel="icon" href="../../media/ANZAC Crest.png" type="image/x-icon">
         <script type="text/javascript" src="tools.js"></script>
         <script src='../wireframe.js'></script>
+        
     </head>
 
     <body>
-        <header>
+        <header  id="0">
             <!--https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
             <img class="floatLeft" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
-            <img class="floatRight" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
+            <img class="floatRight" src='../../media/Douglas Raymond Baker portrait.jpg' alt='ANZAC crest'>
             <H1>ANZAC Douglas Raymond Baker - Letters Home</H1>
         </header>
 
         <nav>
             <ul>
-                <li><a href="">FOREWORD</a>
-                <li><a href="">LETTERS &AMP; POSTCARDS</a>
-                    <ul>
-                        <li>All letters and postcards</li>
-                        <li>1914</li>
-                        <li>1915</li>
-                        <li>1916</li>
-                        <li>1917</li>
-                        <li>1918</li>
-                        <li>Battles</li>
-                    </ul>
+                <li><a href="#0">FOREWORD</a>
+                <li><button class="button collapsible">1914</button>
+                    <div class="collapsibleContent">
+                        <ul>
+                            <li><a href="#1">Post card - August 24th</a></li>
+                            <li><a href="#2">Post card - October 23rd</a></li>
+                        </ul>
+                    </div>
                 </li>
-                <li><a href="">CONTACT ME</a>
+                <li><button class="button collapsible">1915</button>
+                    <div class="collapsibleContent">
+                        <ul>
+                            <li><a href="#3">An account of Gallipoli - May 4th</a></li>
+                            <li><a href="#4">Postcard to Dad - July 21st</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button class="button collapsible">1916</button>
+                    <div class="collapsibleContent">
+                        <ul>
+                            <li><a href="#5">The "Big Push" - July 30th</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button class="button collapsible">1917</button>
+                    <div class="collapsibleContent">
+                        <ul>
+                            <li><a href="#6">Getting wounded again - November 1st</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><button class="button collapsible">1918</button>
+                    <div class="collapsibleContent">
+                        <ul>
+                            <li><a href="#7">Letter to mother - February 8th</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#form">CONTACT ME</a></li>
             </ul>
-            <img src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portrait of Douglas Raymond Baker'>
         </nav>
 
         <main>
             <article class="foreword">
                 <div class="articleHeader">
+                    <a class="floatRight" href="#1">Next</a>
                     <h2>Foreword</h2>
+                    <h3></h3>
                 </div>
                 <p>Hello and welcome,
                 </p><p>This year is the centenary of the birth of the ANZAC legend. As such, many people, particularly young people, are looking for ways to connect with people of that period, in particular those who created the ANZAC legend.
@@ -56,8 +86,9 @@
                 </p>
             </article>
         
-        <article class="postcard 1914" id="1">
+        <article class="letter" id="1">
                 <div class="articleHeader">
+                    <a class="floatLeft" href="#0">Previous</a>
                     <a class="floatRight" href="#2">Next</a>
                     <h2>Post Card</h2>
                     <h3>August 25th, 1914</h3>
@@ -67,7 +98,7 @@
                 </p>
             </article>
         
-        <article class="postcard 1914"  id="2">
+        <article class="letter"  id="2">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#1">Previous</a>
                     <a class="floatRight" href="#3">Next</a>
@@ -80,7 +111,7 @@
                 </p>
             </article>
             
-            <article class="letter battle 1915" id="3">
+            <article class="letter" id="3">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#2">Previous</a>
                     <a class="floatRight" href="#4">Next</a>
@@ -119,7 +150,7 @@
                 </p>
             </article>
             
-            <article class="postcard 1915" id="4">
+            <article class="letter" id="4">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#3">Previous</a>
                     <a class="floatRight" href="#5">Next</a>
@@ -132,7 +163,7 @@
                 </p>
             </article>
             
-            <article class="letter battle 1916" id="5">
+            <article class="letter" id="5">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#4">Previous</a>
                     <a class="floatRight" href="#6">Next</a>
@@ -163,7 +194,7 @@
                 </p>
             </article>
             
-            <article class="letter battle 1917" id="6">
+            <article class="letter" id="6">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#5">Previous</a>
                     <a class="floatRight" href="#7">Next</a>
@@ -190,7 +221,7 @@
                 </p>
             </article>
             
-            <article class="letter 1918" id="7">
+            <article class="letter" id="7">
                 <div class="articleHeader">
                     <a class="floatLeft" href="#6">Previous</a>
                     <h2>Letter to Mother</h2>
@@ -209,22 +240,27 @@
                 </p><p class="center">---oooOooo---
                 </p>
             </article>
-        
-            <form action="https://titan.csit.rmit.edu.au/~e54061/wp/testcontact.php">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email">
-                <label for="mobile">Mobile</label>
-                <input type="subject" id="mobile" name="mobile">
-                <label for="subject">Subject</label>
-                <input type="message" id="subject" name="subject">
-                <label class="messageField" for="message">Message</label>
-                <input type="text" id="message" name="message">
-                <input class="checkBox" type="checkbox" id="remember-me" name="remember-me">
-                <label class="checkBoxLabel" for="remember-me">Rememer me</label>
-                <input type="submit" value="Submit">
-            </form>
+
+            <article id="form">
+                <div class="articleHeader">
+                    <h2>Contact Me</h2>
+                </div>
+                <form action="https://titan.csit.rmit.edu.au/~e54061/wp/testcontact.php">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                    <label for="mobile">Mobile</label>
+                    <input type="subject" id="mobile" name="mobile">
+                    <label for="subject">Subject</label>
+                    <input type="message" id="subject" name="subject">
+                    <label class="messageField" for="message">Message</label>
+                    <input type="text" id="message" name="message">
+                    <input class="checkBox" type="checkbox" id="remember-me" name="remember-me">
+                    <label class="checkBoxLabel" for="remember-me">Rememer me</label>
+                    <input type="submit" name="send" value="Submit">
+                </form>
+            </article>
         </main>
 
         <footer>
@@ -239,5 +275,6 @@
             </div>
             <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
         </footer>
+        <script src="tools.js"></script>        
     </body>
 </html>

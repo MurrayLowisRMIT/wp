@@ -1,56 +1,55 @@
 h1 {
-	text-align: center;
-	font-size: 60px;
 	font-family: sans-serif;
+	font-size: 60px;
+	text-align: center;
     max-width: 1400px;
     margin: 0 0 0 140px;
     padding: 20px 0;
 }
 
 h2 {
-	text-align: center;
-	font-size: 40px;
 	font-family: sans-serif;
+	font-size: 40px;
+	text-align: center;
     margin: 0;
 	padding: 10px 0;
 }
 
 h3 {
-	text-align: center;
-	font-size: 25px;
 	font-family: sans-serif;
+	font-size: 25px;
+	text-align: center;
     margin: 0;
 	padding: 0 0 5px 0;
 }
 
 p {
+    color: #000;
 	font-family: serif;
-    color: #000A;
 	font-size: 20px;
 	padding: 5px 1%;
 	margin: 0;
-    background-color: #EC9;
     border-style: none double;
 }
 
 img {
-    width: 200px;
-    margin: 20px 20px;
+    max-width: 200px;
+    margin: 20px 40px;
 }
 
 body {
 	width: 90%;
-    min-height: 600px;
-	margin: 0 0 0 5%;
+    max-width: 1700px;
+    min-width: 750px;
+    margin: 0 0 0 5%;
 	padding: 0;
     /*https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
     background-image: url('../../media/Rough cotton.png');
-	background-color: #B97;
+    background-color: #FDA;
 }
 
 header {
-    top: 0;
-    background-color: #FDA;
+    background-color: inherit;
     width: 100%;
     overflow: auto;
 }
@@ -58,11 +57,17 @@ header {
 nav {
     position: sticky;
 	top: 50px;
-	list-style-type: none;
     width: 200px;
 	margin: 0;
     padding: 0;
 	float: left;
+}
+
+nav * {
+	list-style-type: none;
+    text-shadow: 0 0 5px #fff;
+	text-decoration: none;
+    border: none;
 }
 
 nav ul {
@@ -70,73 +75,93 @@ nav ul {
 	margin: 0;
 }
 
-nav li {
+nav a, .button {
+	color: #653;
+	font-family: sans-serif;
 	font-size: 20px;
 	font-weight: bold;
-	font-family: sans-serif;
 	text-align: left;
+    margin: 0;
     padding: 10px;
-	color: #653;
     overflow: auto;
 }
 
-nav li li {
-	font-size: 18px;
-	padding: 7px;
+nav div a {
+	font-size: 17px;
+	padding: 7px 13px;
 }
 
-nav a {
-	text-decoration: none;
+nav li, nav a {
     display: block;
-	color: #653;
 }
 
-nav li:hover {
+nav a:hover, .button:hover, .active {
     color: #FEC;
-	background-color: #0003;
-	text-shadow: 0 0 5px #fff;
+}
+
+nav a:hover, .button:hover, nav div a {
+    background-color: #CA7;
+}
+
+.active:hover {
+    background-color: #0003;
+}
+
+nav .active {
+    background-color: #CA7;
+}
+
+.button {
+    width: 200px;
+    background-color: #FDA;
+    cursor: pointer;
+}
+
+.collapsibleContent {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
 }
 
 main {
+    background-color: inherit;
     padding: 0 0 30px 200px;
-    background-color: #FDA;
 }
 
 article {
-    padding: 0;
-	margin: 0 5%;
     background-color: inherit;
     border-style: none none solid none;
     max-width: 1200px;
+    padding: 0;
+	margin: 0 5%;
 }
 
 .articleHeader {
 	position: sticky;
-    background-color: inherit;
-	width: 100%;
-	padding: 0;
 	top: 0;
-	padding: 0;
-	margin: 0;
+    background-color: inherit;
     border-style: none none solid none ;
+	width: 100%;
+	margin: 0;
+	padding: 0;
 }
 
 .articleHeader a {
-    text-align: center;
-	font-size: 25px;
+    color: #000;
 	font-family: sans-serif;
+	font-size: 25px;
+    text-align: center;
+    text-decoration: none;
+    border-color: #CA7;
+    border-style: ridge;
+    border-radius: 10px;
     margin: 20px 0;
 	padding: 0.5%;
-    color: #000;
-    border-style: ridge;
-    border-color: #000A;
-    border-radius: 10px;
-    text-decoration: none;
 }
 
 .articleHeader a:hover {
     color: #FEC;
-	background-color: #0003;
+	background-color: #CA7;
 	text-shadow: 0 0 5px #fff;
 }
 
@@ -153,20 +178,13 @@ html {
 }
     
 .letter p {
-	font-family: cursive;
-    /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
-    background-image: url('../../media/Paper texture.png');
-}
-
-.postcard p {
+    color: #000A;
 	font-family: cursive;
     /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
 }
 
 .foreword p {
-    color: #000;
-    background-color: #FDA;
     border-style: none;
 }
 
@@ -212,7 +230,8 @@ html {
 }
 
 form {
-    margin: 0 5%;
+    width: 420px;
+    margin: 5% auto;
     display: grid;
     grid-template-columns: 80px 20px 300px;
     grid-gap: 10px;
