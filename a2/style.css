@@ -1,6 +1,7 @@
 h1 {
-	font-family: sans-serif;
-	font-size: 60px;
+	font-family: WWIStencil;
+    color: #000C;
+    font-size: 60px;
 	text-align: center;
     max-width: 1400px;
     margin: 0 0 0 140px;
@@ -8,7 +9,8 @@ h1 {
 }
 
 h2 {
-	font-family: sans-serif;
+    font-family: WWIStencil;
+    color: #000C;
 	font-size: 40px;
 	text-align: center;
     margin: 0;
@@ -16,7 +18,8 @@ h2 {
 }
 
 h3 {
-	font-family: sans-serif;
+	font-family: WWIStencil;
+    color: #000C;
 	font-size: 25px;
 	text-align: center;
     margin: 0;
@@ -25,16 +28,22 @@ h3 {
 
 p {
     color: #000;
-	font-family: serif;
+	font-family: basic;
 	font-size: 20px;
 	padding: 5px 1%;
 	margin: 0;
     border-style: none double;
+    border-color: #0008;
 }
 
 img {
     max-width: 200px;
     margin: 20px 40px;
+}
+
+#portait {
+    width: 150px;
+    margin: 20px;
 }
 
 body {
@@ -56,7 +65,7 @@ header {
 
 nav {
     position: sticky;
-	top: 50px;
+	top: 50px;;
     width: 200px;
 	margin: 0;
     padding: 0;
@@ -65,7 +74,7 @@ nav {
 
 nav * {
 	list-style-type: none;
-    text-shadow: 0 0 5px #fff;
+    text-shadow: 0 0 3px #fff;
 	text-decoration: none;
     border: none;
 }
@@ -77,22 +86,27 @@ nav ul {
 
 nav a, .button {
 	color: #653;
-	font-family: sans-serif;
+    font-family: WWIStencil;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: left;
     margin: 0;
-    padding: 10px;
+    padding: 10px 10px 10px 30px;
     overflow: auto;
 }
 
 nav div a {
+	font-family: basic;
 	font-size: 17px;
-	padding: 7px 13px;
+	padding: 7px 45px;
 }
 
 nav li, nav a {
     display: block;
+}
+
+nav div a:hover {
+	text-shadow: 0 0 5px #000;
 }
 
 nav a:hover, .button:hover, .active {
@@ -131,6 +145,7 @@ main {
 article {
     background-color: inherit;
     border-style: none none solid none;
+    border-color: #0008;
     max-width: 1200px;
     padding: 0;
 	margin: 0 5%;
@@ -141,14 +156,15 @@ article {
 	top: 0;
     background-color: inherit;
     border-style: none none solid none ;
+    border-color: #0008;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 }
 
 .articleHeader a {
-    color: #000;
-	font-family: sans-serif;
+    color: #000C;
+	font-family: stencil;
 	font-size: 25px;
     text-align: center;
     text-decoration: none;
@@ -178,8 +194,10 @@ html {
 }
     
 .letter p {
-    color: #000A;
-	font-family: cursive;
+    color: #000C;
+	font-family: handwritten;
+    font-size: 30px;
+    
     /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
 }
@@ -238,6 +256,9 @@ form {
     align-content: center;
 }
 
+form label {
+    font-family: basic;
+}
 form input {
     grid-column: 2 / span 2;
     font-family: serif;
@@ -268,8 +289,37 @@ label {
 }
 
 footer {
+    font-family: basic;
 	height: 80px;
 	margin: 0 0 50px 0;
     padding: 10px 0 0 20px;
 	background-image: linear-gradient(#FDA, #0000);
+}
+
+@font-face {
+    font-family: WWIStencil;
+    /*https://www.fontsquirrel.com/fonts/Top-Secret?q%5Bterm%5D=stencil&q%5Bsearch_check%5D=Y*/
+    src: url("../../media/Fonts/Top_Secret.ttf");
+}
+
+@font-face {
+    font-family: stencil;
+    /*https://www.fontsquirrel.com/fonts/Capture-it?filter%5Bclassifications%5D%5B0%5D=stencil&filter%5Bdownload%5D=local&sort=popular*/
+    src: url("../../media/Fonts/Capture_it.ttf");
+}
+
+@font-face {
+    font-family: basic;
+    /*https://www.fontsquirrel.com/fonts/open-sans?filter%5Bclassifications%5D%5B0%5D=handdrawn&filter%5Bclassifications%5D%5B1%5D=sans+serif&filter%5Bclassifications%5D%5B2%5D=typewriter&filter%5Bdownload%5D=local&sort=popular*/
+    src: url("../../media/Fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: handwritten;
+    /*https://www.fontsquirrel.com/fonts/handwritten?filter%5Bclassifications%5D%5B0%5D=handdrawn&sort=popular*/
+    src: url("../../media/Fonts/journal.ttf");
+}
+
+.basic {
+    font-family: basic;
 }
