@@ -4,7 +4,8 @@ h1 {
     font-size: 60px;
 	text-align: center;
     max-width: 1400px;
-    margin: 0 0 0 140px;
+    !margin: 0 0 0 140px;
+    margin: auto;
     padding: 20px 0;
 }
 
@@ -48,7 +49,7 @@ img {
 
 body {
 	width: 90%;
-    max-width: 1700px;
+    max-width: 2500px;
     min-width: 750px;
     margin: 0 0 0 5%;
 	padding: 0;
@@ -97,6 +98,7 @@ nav a, .button {
 
 nav div a {
 	font-family: basic;
+    color: #542;
 	font-size: 17px;
 	padding: 7px 45px;
 }
@@ -105,24 +107,24 @@ nav li, nav a {
     display: block;
 }
 
-nav div a:hover {
-	text-shadow: 0 0 5px #000;
-}
-
 nav a:hover, .button:hover, .active {
     color: #FEC;
 }
 
-nav a:hover, .button:hover, nav div a {
-    background-color: #CA7;
+nav a:hover, .button:hover {
+    background-color: #653;
 }
 
-.active:hover {
-    background-color: #0003;
+.active:hover, nav div a:hover {
+    background-color: #653;
 }
 
-nav .active {
-    background-color: #CA7;
+nav div a:hover {
+	text-shadow: 0 0 5px #000;
+}
+
+nav .active, nav div a {
+    background-color: #B96;
 }
 
 .button {
@@ -146,7 +148,7 @@ article {
     background-color: inherit;
     border-style: none none solid none;
     border-color: #0008;
-    max-width: 1200px;
+    max-width: 2000px;
     padding: 0;
 	margin: 0 5%;
 }
@@ -177,7 +179,7 @@ article {
 
 .articleHeader a:hover {
     color: #FEC;
-	background-color: #CA7;
+	background-color: #653;
 	text-shadow: 0 0 5px #fff;
 }
 
@@ -264,11 +266,15 @@ form input {
     font-family: serif;
     color: #000;
     font-size: 20px;
-    overflow: auto;
 }
 
-.messageField {
+form textarea {
+    grid-column: 2 / span 2;
+    font-family: serif;
+    color: #000;
+    font-size: 18px;
     height: 200px;
+    width: 324px;
 }
 
 .checkBox {
