@@ -4,7 +4,6 @@ h1 {
     font-size: 60px;
 	text-align: center;
     max-width: 1400px;
-    !margin: 0 0 0 140px;
     margin: auto;
     padding: 20px 0;
 }
@@ -42,7 +41,7 @@ img {
     margin: 20px 40px;
 }
 
-#portait {
+#portrait {
     width: 150px;
     margin: 20px;
 }
@@ -50,7 +49,7 @@ img {
 body {
 	width: 90%;
     max-width: 2500px;
-    min-width: 750px;
+    min-width: 600px;
     margin: 0 0 0 5%;
 	padding: 0;
     /*https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
@@ -66,7 +65,7 @@ header {
 
 nav {
     position: sticky;
-	top: 50px;;
+    top: 50px;
     width: 200px;
 	margin: 0;
     padding: 0;
@@ -261,6 +260,7 @@ form {
 form label {
     font-family: basic;
 }
+
 form input {
     grid-column: 2 / span 2;
     font-family: serif;
@@ -274,7 +274,6 @@ form textarea {
     color: #000;
     font-size: 18px;
     height: 200px;
-    width: 324px;
 }
 
 .checkBox {
@@ -300,6 +299,66 @@ footer {
 	margin: 0 0 50px 0;
     padding: 10px 0 0 20px;
 	background-image: linear-gradient(#FDA, #0000);
+}
+
+@media screen and (max-width: 1203px) {
+    .headerimg {
+    display: none;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    body {
+        margin: 0;
+        width: 100%;
+    }
+    
+    main {
+        padding: 0 0 30px 0;
+    }
+    
+    p {
+ 	padding: 5px 1% 5px 120px;
+    }
+    
+    #portrait {
+        width: 100px;
+        margin: 25px;
+    }
+    
+    nav {
+        position: fixed;
+        top: 200px;
+        width: 150px;
+        background-color: #FDA;
+        z-index: 1;
+        border-style: solid solid solid none;
+        border-color: #653;
+        border-radius: 0 20px 20px 0;
+        box-shadow: 10px 10px 15px #0003;
+    }
+
+    nav a, .button {
+        padding: 6px 10px;
+    }
+
+    nav div a {
+        padding: 5px 15px;
+    }
+
+    .button {
+        width: 150px;
+    }
+
+    form {
+        width: 250px;
+        grid-template-columns: 80px 20px 230px;
+        margin: 5% 0 5% 150px;
+    }
+
+    form textarea {
+        height: 150px;
+    }
 }
 
 @font-face {

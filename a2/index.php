@@ -15,8 +15,8 @@
     <body>
         <header  id="0">
             <!--https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
-            <img class="floatLeft" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
-            <img class="floatRight" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
+            <img class="floatLeft headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
+            <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <H1>ANZAC Douglas Raymond Baker<br><small>Letters Home</small></H1>
         </header>
 
@@ -62,7 +62,7 @@
                 </li>
                 <li><a href="#form">CONTACT ME</a></li>
             </ul>
-        <img class="floatLeft" src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portait of Douglas Baker' id="portait">
+        <img class="floatLeft" src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portait of Douglas Baker' id="portrait">
         </nav>
         
         <main>
