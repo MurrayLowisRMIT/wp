@@ -14,7 +14,8 @@
 
     <body>
         <header  id="0">
-            <!--https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
+            <!--Original image sourced for educational purposes:
+            https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
             <img class="floatLeft headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <H1>ANZAC Douglas Raymond Baker<br><small>Letters Home</small></H1>
