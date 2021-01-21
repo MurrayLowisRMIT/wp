@@ -52,7 +52,8 @@ body {
     min-width: 600px;
     margin: 0 0 0 5%;
 	padding: 0;
-    /*https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
+    /*Original image sourced for educational purposes:
+    https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
     background-image: url('../../media/Rough cotton.png');
     background-color: #FDA;
 }
@@ -199,7 +200,8 @@ html {
 	font-family: handwritten;
     font-size: 30px;
     
-    /*https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
+    /*Original image sourced for educational purposes:
+    https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
 }
 
@@ -229,22 +231,26 @@ html {
 }
 
 .gallipoliLanding{
-    /*https://www.history.com/news/8-things-you-may-not-know-about-the-gallipoli-campaign*/
+    /*Original image sourced for educational purposes:
+    https://www.history.com/news/8-things-you-may-not-know-about-the-gallipoli-campaign*/
     background-image: url('../../media/Gallipoli landing.png');
 }
 
 .gallipoli{
-    /*https://www.history.com/news/7-brilliant-military-retreats*/
+    /*Original image sourced for educational purposes:
+    https://www.history.com/news/7-brilliant-military-retreats*/
     background-image: url('../../media/Gallipoli.png');
 }
 
 .sommeTrenches{
-    /*https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    /*Original image sourced for educational purposes:
+    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
     background-image: url('../../media/Battle of Somme trenches.png');
 }
 
 .sommeMap{
-    /*https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    /*Original image sourced for educational purposes:
+    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
     background-image: url('../../media/Battle of Somme map.png');
 }
 
@@ -363,25 +369,29 @@ footer {
 
 @font-face {
     font-family: WWIStencil;
-    /*https://www.fontsquirrel.com/fonts/Top-Secret?q%5Bterm%5D=stencil&q%5Bsearch_check%5D=Y*/
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/Top-Secret?q%5Bterm%5D=stencil&q%5Bsearch_check%5D=Y*/
     src: url("../../media/Fonts/Top_Secret.ttf");
 }
 
 @font-face {
     font-family: stencil;
-    /*https://www.fontsquirrel.com/fonts/Capture-it?filter%5Bclassifications%5D%5B0%5D=stencil&filter%5Bdownload%5D=local&sort=popular*/
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/Capture-it?filter%5Bclassifications%5D%5B0%5D=stencil&filter%5Bdownload%5D=local&sort=popular*/
     src: url("../../media/Fonts/Capture_it.ttf");
 }
 
 @font-face {
     font-family: basic;
-    /*https://www.fontsquirrel.com/fonts/open-sans?filter%5Bclassifications%5D%5B0%5D=handdrawn&filter%5Bclassifications%5D%5B1%5D=sans+serif&filter%5Bclassifications%5D%5B2%5D=typewriter&filter%5Bdownload%5D=local&sort=popular*/
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/open-sans?filter%5Bclassifications%5D%5B0%5D=handdrawn&filter%5Bclassifications%5D%5B1%5D=sans+serif&filter%5Bclassifications%5D%5B2%5D=typewriter&filter%5Bdownload%5D=local&sort=popular*/
     src: url("../../media/Fonts/OpenSans-Regular.ttf");
 }
 
 @font-face {
     font-family: handwritten;
-    /*https://www.fontsquirrel.com/fonts/handwritten?filter%5Bclassifications%5D%5B0%5D=handdrawn&sort=popular*/
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/handwritten?filter%5Bclassifications%5D%5B0%5D=handdrawn&sort=popular*/
     src: url("../../media/Fonts/journal.ttf");
 }
 
