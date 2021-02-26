@@ -334,7 +334,7 @@ footer {
     
     nav {
         position: fixed;
-        top: 200px;
+        top: 35%;
         width: 150px;
         background-color: #FDA;
         z-index: 1;
