@@ -1,6 +1,4 @@
 <?php
-    session_start();
-
     function top_module($pageTitle) {
         $html = <<<"OUTPUT"
         <!DOCTYPE html>
@@ -85,7 +83,7 @@
                 <div>&copy;<script>document.write(new Date().getFullYear());</script>
                     <noscript>2020</noscript>
                     Murray Lowis, S3862651. Last modified <?= date ("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])); ?>.<br>
-                    <a href="https://github.com/MurrayLowisRMIT/wp/tree/main/a2">https://github.com/MurrayLowisRMIT/wp/tree/main/a2</a>
+                    <a href="https://github.com/MurrayLowisRMIT/wp/tree/main/a2">https://github.com/MurrayLowisRMIT/wp/tree/main/a3</a>
                 </div>
                 <div>
                     Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.

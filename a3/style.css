@@ -1,0 +1,461 @@
+.postcard, .letter {
+    box-sizing: border-box;
+    height: 500px;
+    position: relative;
+    border-style: none double;
+    border-color: #0008;
+}
+
+.postcard div, .letter div {
+    height: 100%;
+    width: 100%;
+    padding: 2%;
+    box-sizing: border-box;
+    position: absolute;
+    overflow: auto;
+    transition: 0.5s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.postcard div:nth-child(1) {
+    transform: rotateY(0deg);
+    background-color: #fff;
+}
+
+.postcard div:nth-child(2) {
+    transform: rotateY(180deg);
+    color: #000C;
+	font-family: handwritten;
+    font-size: 30px;
+    /*Original image sourced for educational purposes:
+    https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
+    background-image: url('../../media/Paper texture.png');
+    overflow: auto;
+}
+
+.postcard:hover div:nth-child(1) {
+    transform: rotateY(180deg);
+}
+
+.postcard:hover div:nth-child(2) {
+    transform: rotateY(360deg);
+}
+
+
+
+
+.letter div:nth-child(1) {
+    transform: translateY(0px);
+    background-color: #fff;
+    z-index: 1;
+}
+
+.letter div:nth-child(2) {
+    color: #000C;
+	font-family: handwritten;
+    font-size: 30px;
+    /*Original image sourced for educational purposes:
+    https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
+    background-image: url('../../media/Paper texture.png');
+    overflow: auto;
+}
+
+.letter:hover div:nth-child(1) {
+    transform: translateY(500px);
+    background-color: #fff0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+h1 {
+	font-family: WWIStencil;
+    color: #000C;
+    font-size: 60px;
+	text-align: center;
+    max-width: 1400px;
+    margin: auto;
+    padding: 20px 0;
+}
+
+h2 {
+    font-family: WWIStencil;
+    color: #000C;
+	font-size: 40px;
+	text-align: center;
+    margin: 0;
+	padding: 10px 0;
+}
+
+h3 {
+	font-family: WWIStencil;
+    color: #000C;
+	font-size: 25px;
+	text-align: center;
+    margin: 0;
+	padding: 0 0 5px 0;
+}
+
+p {
+    color: #000;
+	font-family: basic;
+	font-size: 20px;
+	padding: 5px 1%;
+	margin: 0;
+}
+
+img {
+    max-width: 200px;
+    margin: 20px 40px;
+}
+
+#portrait {
+    width: 150px;
+    margin: 20px;
+}
+
+body {
+	width: 90%;
+    max-width: 2500px;
+    min-width: 600px;
+    margin: 0 0 0 5%;
+	padding: 0;
+    /*Original image sourced for educational purposes:
+    https://depositphotos.com/8441617/stock-photo-rough-cotton-fabric-texture.html*/
+    background-image: url('../../media/Rough cotton.png');
+    background-color: #FDA;
+}
+
+header {
+    background-color: inherit;
+    width: 100%;
+    overflow: auto;
+}
+
+nav {
+    position: sticky;
+    top: 50px;
+    width: 200px;
+	margin: 0;
+    padding: 0;
+	float: left;
+}
+
+nav * {
+	list-style-type: none;
+    text-shadow: 0 0 3px #fff;
+	text-decoration: none;
+    border: none;
+}
+
+nav ul {
+	padding: 0;
+	margin: 0;
+}
+
+nav a, .button {
+	color: #653;
+    font-family: WWIStencil;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: left;
+    margin: 0;
+    padding: 10px 10px 10px 30px;
+    overflow: auto;
+}
+
+nav div a {
+	font-family: basic;
+    color: #542;
+	font-size: 17px;
+	padding: 7px 45px;
+}
+
+nav li, nav a {
+    display: block;
+}
+
+nav a:hover, .button:hover, .active {
+    color: #FEC;
+}
+
+nav a:hover, .button:hover {
+    background-color: #653;
+}
+
+.active:hover, nav div a:hover {
+    background-color: #653;
+}
+
+nav div a:hover {
+	text-shadow: 0 0 5px #000;
+}
+
+nav .active, nav div a {
+    background-color: #B96;
+}
+
+.button {
+    width: 200px;
+    background-color: #FDA;
+    cursor: pointer;
+}
+
+.collapsibleContent {
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    overflow: hidden;
+}
+
+main {
+    background-color: inherit;
+    padding: 0 0 30px 200px;
+}
+
+article {
+    background-color: inherit;
+    border-style: none none solid none;
+    border-color: #0008;
+    max-width: 2000px;
+    padding: 0;
+	margin: 0 5%;
+}
+
+.articleHeader {
+	position: sticky;
+	top: 0;
+    background-color: inherit;
+    border-style: none none solid none ;
+    border-color: #0008;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+    z-index: 2;
+}
+
+.articleHeader a {
+    color: #000C;
+	font-family: stencil;
+	font-size: 25px;
+    text-align: center;
+    text-decoration: none;
+    border-color: #CA7;
+    border-style: ridge;
+    border-radius: 10px;
+    margin: 20px 0;
+	padding: 0.5%;
+}
+
+.articleHeader a:hover {
+    color: #FEC;
+	background-color: #653;
+	text-shadow: 0 0 5px #fff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.foreword p {
+    border-style: none;
+}
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.parallax {
+    min-height: 500px;
+    background-attachment:fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-style: none double;
+}
+
+.gallipoliLanding{
+    /*Original image sourced for educational purposes:
+    https://www.history.com/news/8-things-you-may-not-know-about-the-gallipoli-campaign*/
+    background-image: url('../../media/Gallipoli landing.png');
+}
+
+.gallipoli{
+    /*Original image sourced for educational purposes:
+    https://www.history.com/news/7-brilliant-military-retreats*/
+    background-image: url('../../media/Gallipoli.png');
+}
+
+.sommeTrenches{
+    /*Original image sourced for educational purposes:
+    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    background-image: url('../../media/Battle of Somme trenches.png');
+}
+
+.sommeMap{
+    /*Original image sourced for educational purposes:
+    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
+    background-image: url('../../media/Battle of Somme map.png');
+}
+
+form {
+    width: 420px;
+    margin: 5% auto;
+    display: grid;
+    grid-template-columns: 80px 20px 300px;
+    grid-gap: 10px;
+    align-content: center;
+}
+
+form label {
+    font-family: basic;
+}
+
+form input {
+    grid-column: 2 / span 2;
+    font-family: serif;
+    color: #000;
+    font-size: 20px;
+}
+
+form textarea {
+    grid-column: 2 / span 2;
+    font-family: serif;
+    color: #000;
+    font-size: 18px;
+    height: 200px;
+}
+
+.checkBox {
+    grid-column: 2;
+    text-align: left;
+}
+
+.checkBoxLabel {
+    grid-column: 3;
+    text-align: left;
+}
+
+label {
+	text-align: right;
+    font-family: serif;
+    color: #000A;
+	font-size: 20px;
+}
+
+footer {
+    font-family: basic;
+	height: 80px;
+	margin: 0 0 50px 0;
+    padding: 10px 0 0 20px;
+	background-image: linear-gradient(#FDA, #0000);
+}
+
+@media screen and (max-width: 1203px) {
+    .headerimg {
+    display: none;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    body {
+        margin: 0;
+        width: 100%;
+    }
+    
+    main {
+        padding: 0 0 30px 0;
+    }
+    
+    p {
+ 	padding: 5px 1% 5px 120px;
+    }
+    
+    #portrait {
+        width: 100px;
+        margin: 25px;
+    }
+    
+    nav {
+        position: fixed;
+        top: 35%;
+        width: 150px;
+        background-color: #FDA;
+        z-index: 1;
+        border-style: solid solid solid none;
+        border-color: #653;
+        border-radius: 0 20px 20px 0;
+        box-shadow: 10px 10px 15px #0003;
+    }
+
+    nav a, .button {
+        padding: 6px 10px;
+    }
+
+    nav div a {
+        padding: 5px 15px;
+    }
+
+    .button {
+        width: 150px;
+    }
+
+    form {
+        width: 250px;
+        grid-template-columns: 80px 20px 230px;
+        margin: 5% 0 5% 150px;
+    }
+
+    form textarea {
+        height: 150px;
+    }
+}
+
+@font-face {
+    font-family: WWIStencil;
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/Top-Secret?q%5Bterm%5D=stencil&q%5Bsearch_check%5D=Y*/
+    src: url("../../media/Fonts/Top_Secret.ttf");
+}
+
+@font-face {
+    font-family: stencil;
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/Capture-it?filter%5Bclassifications%5D%5B0%5D=stencil&filter%5Bdownload%5D=local&sort=popular*/
+    src: url("../../media/Fonts/Capture_it.ttf");
+}
+
+@font-face {
+    font-family: basic;
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/open-sans?filter%5Bclassifications%5D%5B0%5D=handdrawn&filter%5Bclassifications%5D%5B1%5D=sans+serif&filter%5Bclassifications%5D%5B2%5D=typewriter&filter%5Bdownload%5D=local&sort=popular*/
+    src: url("../../media/Fonts/OpenSans-Regular.ttf");
+}
+
+@font-face {
+    font-family: handwritten;
+    /*Sourced for educational purposes:
+    https://www.fontsquirrel.com/fonts/handwritten?filter%5Bclassifications%5D%5B0%5D=handdrawn&sort=popular*/
+    src: url("../../media/Fonts/journal.ttf");
+}
+
+.basic {
+    font-family: basic;
+}
