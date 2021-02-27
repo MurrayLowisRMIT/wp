@@ -186,6 +186,14 @@ html {
     scroll-behavior: smooth;
 }
 
+.floatLeft {
+    float: left;
+}
+
+.floatRight {
+    float: right;
+}
+
 .foreword p {
     border-style: none;
 }

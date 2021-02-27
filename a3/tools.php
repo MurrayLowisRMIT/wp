@@ -75,9 +75,9 @@ OUTPUT;
     echo $html;
 }
 
-//--------------------insert date php--------------------------------------------------------V
-//--------------------insert date php--------------------------------------------------------V
-//--------------------insert date php--------------------------------------------------------V
+//--------------------insert date php and remove '\'-----------------------------------------V
+//--------------------insert date php and remove '\'-----------------------------------------V
+//--------------------insert date php and remove '\'-----------------------------------------V
 function end_module() {
     $html = <<<"OUTPUT"
         </main>
@@ -85,7 +85,7 @@ function end_module() {
             <footer>
                 <div>&copy;<script>document.write(new Date().getFullYear());</script>
                     <noscript>2020</noscript>
-                    Murray Lowis, S3862651. Last modified .<br>
+                    Murray Lowis, S3862651. Last modified <?= date ("Y F d  H:i", filemtime(\$_SERVER['SCRIPT_FILENAME'])); ?>.<br>
                     <a href="https://github.com/MurrayLowisRMIT/wp/tree/main/a2">https://github.com/MurrayLowisRMIT/wp/tree/main/a3</a>
                 </div>
                 <div>
@@ -99,7 +99,25 @@ function end_module() {
 OUTPUT;
         echo $html;
 }
-    
+
+function article($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {
+    $html = <<<"OUTPUT"
+                <article>
+                    <div class="articleHeader">
+                        <h2>$battle</h2>
+                        <h3>$town, $country - $dateStart</h3>
+                    </div>
+                    <div class="$type">
+                        <div>placeholder cover text</div>
+                        <div>
+                            $content
+                        </div>
+                    </div>
+                </article>
+OUTPUT;
+        echo $html;
+}
+
 $articleTitle = "Foreword"
 
 ?>
