@@ -1,6 +1,6 @@
 <?php
 
-function topModule($pageTitle) {
+function topModule() {
     $html = <<<"OUTPUT"
     <!DOCTYPE html>
     <html>
@@ -8,7 +8,7 @@ function topModule($pageTitle) {
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="Murray Lowis">
-        <title>$pageTitle</title>
+        <title>ANZAC Douglas Raymond Baker Letters Home</title>
         <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
         <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?= filemtime("style.css"); ?>">
         <link rel="icon" href="../../media/ANZAC Crest.png" type="image/x-icon">
@@ -24,85 +24,116 @@ function topModule($pageTitle) {
             <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <H1>ANZAC Douglas Raymond Baker<br><small>Letters Home</small></H1>
         </header>
-
-        <nav>
-            <ul>
-                <li><a href="#0">FOREWORD</a>
-                <li><button class="button collapsible">1914</button>
-                    <div class="collapsibleContent">
-                        <ul>
-                            <li><a href="#1">Post card - August 24th</a></li>
-                            <li><a href="#2">Post card - October 23rd</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="button collapsible">1915</button>
-                    <div class="collapsibleContent">
-                        <ul>
-                            <li><a href="#3">An account of Gallipoli - May 4th</a></li>
-                            <li><a href="#4">Postcard to Dad - July 21st</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="button collapsible">1916</button>
-                    <div class="collapsibleContent">
-                        <ul>
-                            <li><a href="#5">The "Big Push" - July 30th</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="button collapsible">1917</button>
-                    <div class="collapsibleContent">
-                        <ul>
-                            <li><a href="#6">Getting wounded again - November 1st</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><button class="button collapsible">1918</button>
-                    <div class="collapsibleContent">
-                        <ul>
-                            <li><a href="#7">Letter to mother - February 8th</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#form">CONTACT ME</a></li>
-            </ul>
-        <img class="floatLeft" src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portait of Douglas Baker' id="portrait">
-        </nav>
-
-        <main>
 OUTPUT;
     echo $html;
+    navModule();
 }
 
-//--------------------insert date php and remove '\'-----------------------------------------V!
 function endModule() {
-    $html = <<<"OUTPUT"
-        </main>
+    global $_SERVER;
+    
+    echo "</main>
 
             <footer>
                 <div>&copy;<script>document.write(new Date().getFullYear());</script>
                     <noscript>2020</noscript>
-                    Murray Lowis, S3862651. Last modified <?= date ("Y F d  H:i", filemtime(\$_SERVER['SCRIPT_FILENAME'])); ?>.<br>
-                    <a href="https://github.com/MurrayLowisRMIT/wp/tree/main/a2">https://github.com/MurrayLowisRMIT/wp/tree/main/a3</a>
+                    Murray Lowis, S3862651. Last modified ";
+
+    date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME']));
+
+    echo "          <br>
+                    <a href=\"https://github.com/MurrayLowisRMIT/wp/tree/main/a2\">https://github.com/MurrayLowisRMIT/wp/tree/main/a3</a>
                 </div>
                 <div>
                     Disclaimer: This website is not a real website and is being developed as part of a School of Science Web Programming course at RMIT University in Melbourne, Australia.
                 </div>
                 <div><button id='toggleWireframeCSS' onclick='toggleWireframe()'>Toggle Wireframe CSS</button></div>
             </footer>
-            <script src="tools.js"></script>        
+            <script src=\"tools.js\"></script>
         </body>
-    </html>
+    </html>";
+}
+
+$currentArticle = "foreword";
+$currentArticle = $_POST["articleID"];
+
+//change 'fopen()' to actual address when setup complete -> "/home/eh1/e54061/public_html/wp/letters-home.txt"!!!
+if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
+    $headings = fgetcsv($lettersCSV, 0, "\t");
+    while(($line = fgetcsv($lettersCSV, 0, "\t")) !== false) {
+        $lineAssociative = array_combine($headings, $line);
+        $lettersArray[] = $lineAssociative;
+    }
+    flock($lettersCSV, LOCK_UN);
+    fclose($lettersCSV);}
+else { echo "File unavailable, my disappointment is immeasurable and my day is ruined";
+}
+
+function navModule() {
+    global $lettersArray;
+    foreach($lettersArray as $line) {
+        
+        $year = substr($line[DateStart], 0, 4);
+        if(!in_array($year, $years)) {
+            $years[] = $year;
+        }
+        sort($years);
+        
+        if(!empty($line[Battle])) {
+            $articleKey[] = [$year,$line[Battle]." - ".substr($line[DateStart], 5, 5)];
+        } else {
+            $articleKey[] = [$year,$line[Type]." - ".substr($line[DateStart], 5, 5)];
+        }        
+    }
+
+    echo "<nav>
+        <ul>
+            <form method=\"post\">
+                <li><input type=\"submit\" name=\"articleID\" value=\"Foreword\"/></li>
+            </form>";
+            foreach($years as $value) {
+                echo "<li><button class=\"button collapsible\">".$value."</button>
+                    <div class=\"collapsibleContent\">
+                        <form method=\"post\">
+                            <ul>";
+                            foreach($articleKey as $line) {
+                                if ($line[0] === $value) {
+                                    echo "<li><input type=\"submit\" name=\"articleID\" value=\"".$line[1]."\"/></li>";
+                                }
+                            }
+                            echo "</ul>
+                        </form>
+                    </div>
+                </li>";
+            }
+            echo "</ul>
+            <img class=\"floatLeft\" src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portait of Douglas Baker' id=\"portrait\">
+        </nav>
+
+        <main>";
+}
+echo $lettersArray[0][DateStart];
+
+/*function articleBuilder($currentArticle) {
+    $contentFormatted = str_replace("\n", "</p><p>", $lettersArray[$articleID][Content]);
+    $html = <<<"OUTPUT"
+                <article>
+                    <div class="articleHeader">
+                        <h2>$lettersArray[$articleID][Battle]</h2>
+                        <h3>$lettersArray[$articleID][Town], $lettersArray[$articleID][Country] - $lettersArray[$articleID][DateStart]</h3>
+                    </div>
+                    <div class="$lettersArray[$articleID][Type]">
+                        <div>$lettersArray[$articleID][Type] placeholder cover text</div>
+                        <div><p>$contentFormatted</p></div>
+                    </div>
+                </article>
 OUTPUT;
     echo $html;
-}
+    //echo "<p>test".$lettersArray[$articleID]."</p>";
+}*/
 
-function selectArticle {
-    
-}
-
-function article($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {    
+function articleBuilder($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {
+    $contentFormatted = str_replace("\n", "</p><p>", $content);
     $html = <<<"OUTPUT"
                 <article>
                     <div class="articleHeader">
@@ -111,25 +142,11 @@ function article($dateStart, $dateEnd, $type, $town, $country, $transport, $batt
                     </div>
                     <div class="$type">
                         <div>$type placeholder cover text</div>
-                        <div><p>$content</p></div>
+                        <div><p>$contentFormatted</p></div>
                     </div>
                 </article>
 OUTPUT;
     echo $html;
-}
-
-//change 'fopen()' to actual address when setup complete -> "/home/eh1/e54061/public_html/wp/letters-home.txt"!
-if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
-    $headings = fgetcsv($lettersCSV, 0, "\t");
-    while(($line = fgetcsv($lettersCSV, 0, "\t")) !== false) {
-        $lineAssociative = array_combine($headings, $line);
-        $lettersArray[] = $lineAssociative;
-    }
-    flock($lettersCSV, LOCK_UN);
-    fclose($lettersCSV);
-}
-    else {
-        echo "File unavailable, my disappointment is immeasurable and my day is ruined";
 }
 
 ?>

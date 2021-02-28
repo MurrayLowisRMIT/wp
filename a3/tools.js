@@ -1,6 +1,6 @@
+//Expandable/collapsible menu elements
 var collapse = document.getElementsByClassName("collapsible");
 var i;
-
 for (i = 0; i < collapse.length; i++) {
     collapse[i].addEventListener("click", function() {
         this.classList.toggle("active");
@@ -12,3 +12,9 @@ for (i = 0; i < collapse.length; i++) {
         } 
     });
 }
+
+//Article selector
+/*var articleID;
+function articleSelect(article) {
+       document.getElementById("articleID").innerHTML = 1;
+     }*/
