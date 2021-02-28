@@ -1,6 +1,6 @@
 <?php
 
-function top_module($pageTitle) {
+function topModule($pageTitle) {
     $html = <<<"OUTPUT"
     <!DOCTYPE html>
     <html>
@@ -75,10 +75,8 @@ OUTPUT;
     echo $html;
 }
 
-//--------------------insert date php and remove '\'-----------------------------------------V
-//--------------------insert date php and remove '\'-----------------------------------------V
-//--------------------insert date php and remove '\'-----------------------------------------V
-function end_module() {
+//--------------------insert date php and remove '\'-----------------------------------------V!
+function endModule() {
     $html = <<<"OUTPUT"
         </main>
 
@@ -97,10 +95,14 @@ function end_module() {
         </body>
     </html>
 OUTPUT;
-        echo $html;
+    echo $html;
 }
 
-function article($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {
+function selectArticle {
+    
+}
+
+function article($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {    
     $html = <<<"OUTPUT"
                 <article>
                     <div class="articleHeader">
@@ -108,16 +110,26 @@ function article($dateStart, $dateEnd, $type, $town, $country, $transport, $batt
                         <h3>$town, $country - $dateStart</h3>
                     </div>
                     <div class="$type">
-                        <div>placeholder cover text</div>
-                        <div>
-                            $content
-                        </div>
+                        <div>$type placeholder cover text</div>
+                        <div><p>$content</p></div>
                     </div>
                 </article>
 OUTPUT;
-        echo $html;
+    echo $html;
 }
 
-$articleTitle = "Foreword"
+//change 'fopen()' to actual address when setup complete -> "/home/eh1/e54061/public_html/wp/letters-home.txt"!
+if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
+    $headings = fgetcsv($lettersCSV, 0, "\t");
+    while(($line = fgetcsv($lettersCSV, 0, "\t")) !== false) {
+        $lineAssociative = array_combine($headings, $line);
+        $lettersArray[] = $lineAssociative;
+    }
+    flock($lettersCSV, LOCK_UN);
+    fclose($lettersCSV);
+}
+    else {
+        echo "File unavailable, my disappointment is immeasurable and my day is ruined";
+}
 
 ?>

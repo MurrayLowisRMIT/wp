@@ -296,7 +296,7 @@ footer {
 	background-image: linear-gradient(#FDA, #0000);
 }
 
-.postcard, .letter {
+.Postcard, .Letter {
     box-sizing: border-box;
     height: 500px;
     position: relative;
@@ -304,7 +304,7 @@ footer {
     border-color: #0008;
 }
 
-.postcard div, .letter div {
+.Postcard div, .Letter div {
     height: 100%;
     width: 100%;
     padding: 2%;
@@ -316,12 +316,12 @@ footer {
     -webkit-backface-visibility: hidden;
 }
 
-.postcard div:nth-child(1) {
+.Postcard div:nth-child(1) {
     transform: rotateY(0deg);
     background-color: #fff;
 }
 
-.postcard div:nth-child(2) {
+.Postcard div:nth-child(2) {
     transform: rotateY(180deg);
     color: #000C;
 	font-family: handwritten;
@@ -332,24 +332,24 @@ footer {
     overflow: auto;
 }
 
-.postcard:hover div:nth-child(1) {
+.Postcard:hover div:nth-child(1) {
     transform: rotateY(180deg);
 }
 
-.postcard:hover div:nth-child(2) {
+.Postcard:hover div:nth-child(2) {
     transform: rotateY(360deg);
 }
 
 
 
 
-.letter div:nth-child(1) {
+.Letter div:nth-child(1) {
     transform: translateY(0px);
     background-color: #fff;
     z-index: 1;
 }
 
-.letter div:nth-child(2) {
+.Letter div:nth-child(2) {
     color: #000C;
 	font-family: handwritten;
     font-size: 30px;
@@ -359,7 +359,7 @@ footer {
     overflow: auto;
 }
 
-.letter:hover div:nth-child(1) {
+.Letter:hover div:nth-child(1) {
     transform: translateY(500px);
     background-color: #fff0;
 }
