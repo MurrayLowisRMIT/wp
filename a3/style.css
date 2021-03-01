@@ -83,7 +83,7 @@ nav ul {
 	margin: 0;
 }
 
-nav a, .button {
+nav input, .button {
 	color: #653;
     font-family: WWIStencil;
 	font-size: 20px;
@@ -94,34 +94,34 @@ nav a, .button {
     overflow: auto;
 }
 
-nav div a {
+nav div input {
 	font-family: basic;
     color: #542;
 	font-size: 17px;
 	padding: 7px 45px;
 }
 
-nav li, nav a {
+nav li, nav input {
     display: block;
 }
 
-nav a:hover, .button:hover, .active {
+nav input:hover, .button:hover, .active {
     color: #FEC;
 }
 
-nav a:hover, .button:hover {
+nav input:hover, .button:hover {
     background-color: #653;
 }
 
-.active:hover, nav div a:hover {
+.active:hover, nav div input:hover {
     background-color: #653;
 }
 
-nav div a:hover {
+nav div input:hover {
 	text-shadow: 0 0 5px #000;
 }
 
-nav .active, nav div a {
+nav .active, nav div input {
     background-color: #B96;
 }
 
@@ -198,52 +198,7 @@ html {
     border-style: none;
 }
 
-.left {
-    text-align: left;
-}
-
-.right {
-    text-align: right;
-}
-
-.center {
-    text-align: center;
-}
-
-.parallax {
-    min-height: 500px;
-    background-attachment:fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-style: none double;
-}
-
-.gallipoliLanding{
-    /*Original image sourced for educational purposes:
-    https://www.history.com/news/8-things-you-may-not-know-about-the-gallipoli-campaign*/
-    background-image: url('../../media/Gallipoli landing.png');
-}
-
-.gallipoli{
-    /*Original image sourced for educational purposes:
-    https://www.history.com/news/7-brilliant-military-retreats*/
-    background-image: url('../../media/Gallipoli.png');
-}
-
-.sommeTrenches{
-    /*Original image sourced for educational purposes:
-    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
-    background-image: url('../../media/Battle of Somme trenches.png');
-}
-
-.sommeMap{
-    /*Original image sourced for educational purposes:
-    https://www.theglobeandmail.com/news/national/why-july-1-means-something-very-different-for-newfoundland-andlabrador/article30717153/*/
-    background-image: url('../../media/Battle of Somme map.png');
-}
-
-form {
+article form {
     width: 420px;
     margin: 5% auto;
     display: grid;
@@ -252,18 +207,18 @@ form {
     align-content: center;
 }
 
-form label {
+article form label {
     font-family: basic;
 }
 
-form input {
+article form input {
     grid-column: 2 / span 2;
     font-family: serif;
     color: #000;
     font-size: 20px;
 }
 
-form textarea {
+article form textarea {
     grid-column: 2 / span 2;
     font-family: serif;
     color: #000;
@@ -271,17 +226,17 @@ form textarea {
     height: 200px;
 }
 
-.checkBox {
+article .checkBox {
     grid-column: 2;
     text-align: left;
 }
 
-.checkBoxLabel {
+article .checkBoxLabel {
     grid-column: 3;
     text-align: left;
 }
 
-label {
+article label {
 	text-align: right;
     font-family: serif;
     color: #000A;
@@ -339,9 +294,6 @@ footer {
 .Postcard:hover div:nth-child(2) {
     transform: rotateY(360deg);
 }
-
-
-
 
 .Letter div:nth-child(1) {
     transform: translateY(0px);
@@ -401,11 +353,11 @@ footer {
         box-shadow: 10px 10px 15px #0003;
     }
 
-    nav a, .button {
+    nav input, .button {
         padding: 6px 10px;
     }
 
-    nav div a {
+    nav div input {
         padding: 5px 15px;
     }
 
@@ -413,13 +365,13 @@ footer {
         width: 150px;
     }
 
-    form {
+    article form {
         width: 250px;
         grid-template-columns: 80px 20px 230px;
         margin: 5% 0 5% 150px;
     }
 
-    form textarea {
+    article form textarea {
         height: 150px;
     }
 }

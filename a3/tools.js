@@ -12,9 +12,3 @@ for (i = 0; i < collapse.length; i++) {
         } 
     });
 }
-
-//Article selector
-/*var articleID;
-function articleSelect(article) {
-       document.getElementById("articleID").innerHTML = 1;
-     }*/

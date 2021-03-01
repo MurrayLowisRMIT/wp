@@ -56,6 +56,7 @@ function endModule() {
 //change 'fopen()' to actual address when setup complete -> "/home/eh1/e54061/public_html/wp/letters-home.txt"!!!
 if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
     $headings = fgetcsv($lettersCSV, 0, "\t");
+    
     $articleID = 0;
     while(($line = fgetcsv($lettersCSV, 0, "\t")) !== false) {
         $lineAssociative = array_combine($headings, $line);
@@ -87,17 +88,23 @@ function navModule() {
     
     echo "<nav>
         <ul>
-            <form method=\"GET\">
+            <form method=\"POST\">
                 <li><input type=\"submit\" name=\"articleID\" value=\"Foreword\"/></li>
             </form>";
             foreach($years as $value) {
                 echo "<li><button class=\"button collapsible\">".$value."</button>
                     <div class=\"collapsibleContent\">
-                        <form method=\"GET\">
+                        <form method=\"POST\">
                             <ul>";
-                            foreach($articleKey as $row) {
-                                if ($row[0] === $value) {
-                                    echo "<li><input type=\"submit\" name=\"articleID\" value=\"".$row[1]."\"/></li>";
+                            unset($line);
+                            foreach($lettersArray as $line) {
+                                if (substr($line[DateStart], 0, 4) === $value) {
+                                    echo "<li><input type=\"submit\" name=\"articleID\" value=\"";
+                                    if(!empty($line[Battle])) {
+                                        echo $line[Battle];
+                                    } else {
+                                        echo $line[Type];
+                                    } echo " - ".$line[DateStart]."\"/></li>";
                                 }
                             }
                             echo "</ul>
@@ -105,8 +112,8 @@ function navModule() {
                     </div>
                 </li>";
             }
-            echo "<form method=\"GET\">
-                <li><input type=\"submit\" name=\"articleID\" value=\"Contact us\"/></li>
+            echo "<form method=\"POST\">
+                <li><input type=\"submit\" name=\"articleID\" value=\"Contact me\"/></li>
             </form>
             </ul>
             <img class=\"floatLeft\" src='../../media/Douglas Raymond Baker portrait.jpg' alt='Portait of Douglas Baker' id=\"portrait\">
@@ -116,20 +123,16 @@ function navModule() {
 }
 
 function articleBuilder() {
-    /*global $lettersArray;
-    //$lettersArray[textual key][data (0-8)]//!!!
-    //global $_GET;//!!!
-    global $articleKey;
-    //$articleKey[$year, Battle/Type - DateStart, key]//!!!
+    global $lettersArray;
     
     foreach($lettersArray as $line) {
         $year = substr($line[DateStart], 0, 4);
         if(!in_array($year, $years)) {
             $years[] = $year;
         }
-    }*/
+    }
 
-    if ($_GET["articleID"] === "Foreword") {
+    if ($_POST["articleID"] === "Foreword" or empty($_POST["articleID"])) {
         $html = <<<"OUTPUT"
         <article class="foreword">
             <div class="articleHeader">
@@ -150,7 +153,7 @@ function articleBuilder() {
         </article>
 OUTPUT;
         echo $html;
-    } else if ($_GET["articleID"] === "Contact us") {
+    } else if ($_POST["articleID"] === "Contact me") {
         $html = <<<"OUTPUT"
         <article id="form">
             <div class="articleHeader">
@@ -174,36 +177,45 @@ OUTPUT;
         </article>
 OUTPUT;
         echo $html;
-    } else {/*
-    $contentFormatted = str_replace("\n", "</p><p>", {$lettersArray[$_GET["articleID"]][Content]});
+    } else {
+        
+        foreach($lettersArray as $key) {
+            if ($key[DateStart] == substr($_POST["articleID"],-10)) {
+                $articleID = $key[ArticleID];
+            }
+        }
+        
         echo "<article>
-                <div class=\"articleHeader\">
-                    <h2>".{$lettersArray[$_GET["articleID"]][Battle]}."</h2>
-                    <h3>".{$lettersArray[$_GET["articleID"]][Town]}.", ".{$lettersArray[$_GET["articleID"]][Country]}." - ".{$lettersArray[$_GET["articleID"]][DateStart]}."</h3>
+                <div class=\"articleHeader\"><h2>";
+                    if(!empty($lettersArray[$articleID][Battle])) {
+                        echo $lettersArray[$articleID][Battle]."</h2><h3>";
+                        if(!empty($lettersArray[$articleID][Town])) {
+                            echo $lettersArray[$articleID][Town];
+                        } else {
+                            echo $lettersArray[$articleID][Type];
+                        }
+                        if (!empty($lettersArray[$articleID][Country])) {
+                            echo ", ".$lettersArray[$articleID][Country];
+                        }
+                        echo " - ".$lettersArray[$articleID][DateStart]."</h3>";
+                    } else {
+                        if(!empty($lettersArray[$articleID][Town])) {
+                            echo $lettersArray[$articleID][Town];
+                        } else {
+                            echo $lettersArray[$articleID][Type];
+                        }
+                        if (!empty($lettersArray[$articleID][Country])) {
+                            echo ", ".$lettersArray[$articleID][Country];
+                        }
+                        echo " - ".$lettersArray[$articleID][DateStart]."</h2>";
+                    }
+                echo "</div>
+                <div class=\"".$lettersArray[$articleID][Type]."\">
+                    <div>".$lettersArray[$articleID][Type]." placeholder cover text</div>
+                    <div><p>".str_replace("\n", "</p><p>", $lettersArray[$articleID][Content])."</p></div>
                 </div>
-                <div class=\"".{$lettersArray[$_GET["articleID"]][Type]}."\">
-                    <div>".{$lettersArray[$_GET["articleID"]][Type]}." placeholder cover text</div>
-                    <div><p>".{$contentFormatted}."</p></div>
-                </div>
-            </article>";*/
+            </article>";
     }
 }
-
-/*function articleBuilder($dateStart, $dateEnd, $type, $town, $country, $transport, $battle, $content) {
-    $contentFormatted = str_replace("\n", "</p><p>", $content);
-    $html = <<<"OUTPUT"
-                <article>
-                    <div class="articleHeader">
-                        <h2>$battle</h2>
-                        <h3>$town, $country - $dateStart</h3>
-                    </div>
-                    <div class="$type">
-                        <div>$type placeholder cover text</div>
-                        <div><p>$contentFormatted</p></div>
-                    </div>
-                </article>
-OUTPUT;
-    echo $html;
-}*/
 
 ?>
