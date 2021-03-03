@@ -1,5 +1,8 @@
 <?php
 
+//Contents were being output correctly, but were also including notices about unset variables for some reason so reporting is disabled
+error_reporting(0);
+
 function topModule() {
     $html = <<<"OUTPUT"
     <!DOCTYPE html>
@@ -29,8 +32,7 @@ OUTPUT;
 }
 
 function endModule() {
-    //global $_SERVER;//!!!
-    
+    //I eventually realised I should have just used print_r instead of echo, but not changing it now
     echo "</main>
 
             <footer>
@@ -53,7 +55,8 @@ function endModule() {
     </html>";
 }
 
-//change 'fopen()' to actual address when setup complete -> "/home/eh1/e54061/public_html/wp/letters-home.txt"!!!
+//swap this line in for the  one below it when done testing!!!
+//if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
 if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
     $headings = fgetcsv($lettersCSV, 0, "\t");
     
@@ -65,8 +68,7 @@ if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH
         $articleID += 1;
     }
     flock($lettersCSV, LOCK_UN);
-    fclose($lettersCSV);}
-else { echo "File unavailable, my disappointment is immeasurable and my day is ruined";
+    fclose($lettersCSV);} else { echo "File unavailable, my disappointment is immeasurable and my day is ruined";
 }
 
 function navModule() {
@@ -88,13 +90,13 @@ function navModule() {
     
     echo "<nav>
         <ul>
-            <form method=\"POST\">
+            <form method=\"GET\">
                 <li><input type=\"submit\" name=\"articleID\" value=\"Foreword\"/></li>
             </form>";
             foreach($years as $value) {
                 echo "<li><button class=\"button collapsible\">".$value."</button>
                     <div class=\"collapsibleContent\">
-                        <form method=\"POST\">
+                        <form method=\"GET\">
                             <ul>";
                             unset($line);
                             foreach($lettersArray as $line) {
@@ -112,7 +114,7 @@ function navModule() {
                     </div>
                 </li>";
             }
-            echo "<form method=\"POST\">
+            echo "<form method=\"GET\">
                 <li><input type=\"submit\" name=\"articleID\" value=\"Contact me\"/></li>
             </form>
             </ul>
@@ -123,8 +125,7 @@ function navModule() {
 }
 
 function articleBuilder() {
-    global $lettersArray;
-    
+    global $lettersArray;    
     foreach($lettersArray as $line) {
         $year = substr($line[DateStart], 0, 4);
         if(!in_array($year, $years)) {
@@ -132,7 +133,7 @@ function articleBuilder() {
         }
     }
 
-    if ($_POST["articleID"] === "Foreword" or empty($_POST["articleID"])) {
+    if ($_GET["articleID"] === "Foreword" or empty($_GET["articleID"])) {
         $html = <<<"OUTPUT"
         <article class="foreword">
             <div class="articleHeader">
@@ -153,13 +154,16 @@ function articleBuilder() {
         </article>
 OUTPUT;
         echo $html;
-    } else if ($_POST["articleID"] === "Contact me") {
+    } else if ($_GET["articleID"] === "Contact me") {
+
+        
+        
         $html = <<<"OUTPUT"
         <article id="form">
             <div class="articleHeader">
                 <h2 class="basic">Contact Me</h2>
             </div>
-            <form action="https://titan.csit.rmit.edu.au/~e54061/wp/testcontact.php" method="post">
+            <form action="post-validation.php" method="POST">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Name">
                 <label for="email">Email</label>
@@ -177,10 +181,36 @@ OUTPUT;
         </article>
 OUTPUT;
         echo $html;
+        
+        
+        
+/*        $html = <<<"OUTPUT"
+        <article id="form">
+            <div class="articleHeader">
+                <h2 class="basic">Contact Me</h2>
+            </div>
+            <form action="https://titan.csit.rmit.edu.au/~e54061/wp/testcontact.php" method="POST">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Name">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email">
+                <label for="mobile">Mobile</label>
+                <input type="subject" id="mobile" name="mobile" placeholder="Mobile">
+                <label for="subject">Subject</label>
+                <input type="message" id="subject" name="subject" placeholder="Subject">
+                <label class="messageField" for="message">Message</label>
+                <textarea class="messageField basic" id="message" name="message" cols='80' rows='9'></textarea>
+                <input class="checkBox" type="checkbox" id="rememberMe" name="remember-me">
+                <label class="checkBoxLabel" for="rememberMe">Remember me</label>
+                <input type="submit" name="send" value="Submit">
+            </form>
+        </article>
+OUTPUT;
+        echo $html;*/
     } else {
         
         foreach($lettersArray as $key) {
-            if ($key[DateStart] == substr($_POST["articleID"],-10)) {
+            if ($key[DateStart] == substr($_GET["articleID"],-10)) {
                 $articleID = $key[ArticleID];
             }
         }
@@ -189,15 +219,10 @@ OUTPUT;
                 <div class=\"articleHeader\"><h2>";
                     if(!empty($lettersArray[$articleID][Battle])) {
                         echo $lettersArray[$articleID][Battle]."</h2><h3>";
-                        if(!empty($lettersArray[$articleID][Town])) {
-                            echo $lettersArray[$articleID][Town];
-                        } else {
-                            echo $lettersArray[$articleID][Type];
-                        }
                         if (!empty($lettersArray[$articleID][Country])) {
-                            echo ", ".$lettersArray[$articleID][Country];
+                            echo $lettersArray[$articleID][Country]." - ";
                         }
-                        echo " - ".$lettersArray[$articleID][DateStart]."</h3>";
+                        echo $lettersArray[$articleID][DateStart]."</h3>";
                     } else {
                         if(!empty($lettersArray[$articleID][Town])) {
                             echo $lettersArray[$articleID][Town];

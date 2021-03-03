@@ -65,17 +65,24 @@ header {
 nav {
     position: sticky;
     top: 50px;
-    width: 200px;
+    width: auto;
 	margin: 0;
     padding: 0;
 	float: left;
 }
 
 nav * {
+    width: 100%;
+    background-color: #FDA;
 	list-style-type: none;
     text-shadow: 0 0 3px #fff;
 	text-decoration: none;
     border: none;
+    overflow: auto;
+}
+    
+nav ul, nav form {
+    background-color: #0000;
 }
 
 nav ul {
@@ -83,52 +90,60 @@ nav ul {
 	margin: 0;
 }
 
-nav input, .button {
+nav input, nav .button, nav li {
 	color: #653;
     font-family: WWIStencil;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: left;
     margin: 0;
-    padding: 10px 10px 10px 30px;
-    overflow: auto;
-}
-
-nav div input {
-	font-family: basic;
-    color: #542;
-	font-size: 17px;
-	padding: 7px 45px;
-}
-
-nav li, nav input {
     display: block;
+    cursor: pointer;
 }
 
-nav input:hover, .button:hover, .active {
-    color: #FEC;
+nav input, nav .button {
+    padding: 10px 10px 10px 15px;
 }
 
-nav input:hover, .button:hover {
-    background-color: #653;
+nav li {
+    border-radius: 0 20px 20px 0;
+    margin: 3px 0;
 }
 
-.active:hover, nav div input:hover {
-    background-color: #653;
+nav li li {
+    border-radius: 0;
+    margin: 0;
 }
 
-nav div input:hover {
-	text-shadow: 0 0 5px #000;
-}
-
-nav .active, nav div input {
+nav .active {
     background-color: #B96;
 }
 
-.button {
-    width: 200px;
-    background-color: #FDA;
-    cursor: pointer;
+nav .active, nav li li input {
+    background-color: #B96;
+}
+
+nav li li input {
+	font-family: basic;
+    color: #542;
+	font-size: 17px;
+	padding: 7px 30px;
+}
+
+nav li li:first-child input {
+    box-shadow: inset 0 10px 10px -10px #000;
+}
+
+nav input:hover, nav .button:hover, nav li .active {
+    color: #FEC;
+}
+
+nav input:hover, .button:hover, nav .active:hover, nav li li input:hover {
+    background-color: #653;
+}
+
+nav li li input:hover {
+	text-shadow: 0 0 5px #000;
 }
 
 .collapsibleContent {
@@ -160,7 +175,7 @@ article {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-    z-index: 2;
+    z-index: 1;
 }
 
 .articleHeader a {
@@ -276,6 +291,10 @@ footer {
     background-color: #fff;
 }
 
+.Postcard:hover div:nth-child(1) {
+    transform: rotateY(180deg);
+}
+
 .Postcard div:nth-child(2) {
     transform: rotateY(180deg);
     color: #000C;
@@ -287,18 +306,21 @@ footer {
     overflow: auto;
 }
 
-.Postcard:hover div:nth-child(1) {
-    transform: rotateY(180deg);
-}
-
 .Postcard:hover div:nth-child(2) {
     transform: rotateY(360deg);
 }
 
 .Letter div:nth-child(1) {
-    transform: translateY(0px);
+    transform: rotateX(0deg);
+    transform-origin: bottom;
     background-color: #fff;
     z-index: 1;
+}
+
+.Letter:hover div:nth-child(1) {
+    transform: rotateX(90deg);
+    transform-origin: bottom;
+    background-color: #fff0;
 }
 
 .Letter div:nth-child(2) {
@@ -309,11 +331,6 @@ footer {
     https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
     overflow: auto;
-}
-
-.Letter:hover div:nth-child(1) {
-    transform: translateY(500px);
-    background-color: #fff0;
 }
 
 @media screen and (max-width: 1203px) {
@@ -332,8 +349,9 @@ footer {
         padding: 0 0 30px 0;
     }
     
-    p {
- 	padding: 5px 1% 5px 120px;
+    article {
+        margin: 0;
+        padding: 0 0 0 200px;
     }
     
     #portrait {
@@ -344,9 +362,8 @@ footer {
     nav {
         position: fixed;
         top: 35%;
-        width: 150px;
         background-color: #FDA;
-        z-index: 1;
+        z-index: 2;
         border-style: solid solid solid none;
         border-color: #653;
         border-radius: 0 20px 20px 0;
@@ -357,18 +374,12 @@ footer {
         padding: 6px 10px;
     }
 
-    nav div input {
+    nav li li input {
         padding: 5px 15px;
     }
-
-    .button {
-        width: 150px;
-    }
-
+    
     article form {
-        width: 250px;
         grid-template-columns: 80px 20px 230px;
-        margin: 5% 0 5% 150px;
     }
 
     article form textarea {
