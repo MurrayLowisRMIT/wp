@@ -13,7 +13,7 @@ function topModule() {
         <meta name="author" content="Murray Lowis">
         <title>ANZAC Douglas Raymond Baker Letters Home</title>
         <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
-        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t=<?= filemtime("style.css"); ?>">
+        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t= filemtime("style.css"); ?>
         <link rel="icon" href="../../media/ANZAC Crest.png" type="image/x-icon">
         <script type="text/javascript" src="tools.js"></script>
         <script src='../wireframe.js'></script>
@@ -32,7 +32,6 @@ OUTPUT;
 }
 
 function endModule() {
-    //I eventually realised I should have just used print_r instead of echo, but not changing it now
     echo "</main>
 
             <footer>
@@ -56,8 +55,8 @@ function endModule() {
 }
 
 //swap this line in for the  one below it when done testing!!!
-//if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
-if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
+if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
+//if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
     $headings = fgetcsv($lettersCSV, 0, "\t");
     
     $articleID = 0;
@@ -94,7 +93,7 @@ function navModule() {
                 <li><input type=\"submit\" name=\"articleID\" value=\"Foreword\"/></li>
             </form>";
             foreach($years as $value) {
-                echo "<li><button class=\"button collapsible\">".$value."</button>
+                 echo "<li><button class=\"button collapsible\">".$value."</button>
                     <div class=\"collapsibleContent\">
                         <form method=\"GET\">
                             <ul>";
@@ -103,9 +102,9 @@ function navModule() {
                                 if (substr($line[DateStart], 0, 4) === $value) {
                                     echo "<li><input type=\"submit\" name=\"articleID\" value=\"";
                                     if(!empty($line[Battle])) {
-                                        echo $line[Battle];
+                                         echo $line[Battle];
                                     } else {
-                                        echo $line[Type];
+                                         echo $line[Type];
                                     } echo " - ".$line[DateStart]."\"/></li>";
                                 }
                             }
@@ -126,6 +125,9 @@ function navModule() {
 
 function articleBuilder() {
     global $lettersArray;    
+    global $formData;
+    global $errors;
+    
     foreach($lettersArray as $line) {
         $year = substr($line[DateStart], 0, 4);
         if(!in_array($year, $years)) {
@@ -155,58 +157,43 @@ function articleBuilder() {
 OUTPUT;
         echo $html;
     } else if ($_GET["articleID"] === "Contact me") {
-
-        
-        
-        $html = <<<"OUTPUT"
-        <article id="form">
-            <div class="articleHeader">
-                <h2 class="basic">Contact Me</h2>
+        echo "<article id=\"form\">
+            <div class=\"articleHeader\">
+                <h2 class=\"basic\">Contact Me</h2>
             </div>
-            <form action="post-validation.php" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email">
-                <label for="mobile">Mobile</label>
-                <input type="subject" id="mobile" name="mobile" placeholder="Mobile">
-                <label for="subject">Subject</label>
-                <input type="message" id="subject" name="subject" placeholder="Subject">
-                <label class="messageField" for="message">Message</label>
-                <textarea class="messageField basic" id="message" name="message" cols='80' rows='9'></textarea>
-                <input class="checkBox" type="checkbox" id="remember-me" name="remember-me">
-                <label class="checkBoxLabel" for="remember-me">Remember me</label>
-                <input type="submit" name="send" value="Submit">
+            <form action=\"post-validation.php\" method=\"POST\">
+                <label for=\"name\">Name</label>
+                <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
+                if(!empty($_COOKIE["name"])) {
+                        echo "\" value=\"".$_COOKIE["name"];
+                    }
+                echo "\">
+                <p class =\"error\">".$errors['name']."</p>
+                <label for=\"email\">Email</label>
+                <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
+                if(!empty($_COOKIE["email"])) {
+                        echo "\" value=\"".$_COOKIE["email"];
+                    }
+                echo "\">
+                <p class =\"error\">".$errors['email']."</p>
+                <label for=\"mobile\">Mobile</label>
+                <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
+                if(!empty($_COOKIE["mobile"])) {
+                        echo "\" value=\"".$_COOKIE["mobile"];
+                    }
+                echo "\">
+                <p class =\"error\">".$errors['mobile']."</p>
+                <label for=\"subject\">Subject</label>
+                <input type=\"message\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
+                <p class =\"error\">".$errors['subject']."</p>
+                <label class=\"messageField\" for=\"message\">Message</label>
+                <textarea class=\"messageField basic\" id=\"message\" name=\"message\" cols='80' rows='9'></textarea>
+                <p class =\"error\">".$errors['message']."</p>
+                <input class=\"checkBox\" type=\"checkbox\" id=\"rememberMe\" name=\"rememberMe\">
+                <label class=\"checkBoxLabel\" for=\"rememberMe\">Remember me</label>
+                <input type=\"submit\" name=\"send\" value=\"Submit\">
             </form>
-        </article>
-OUTPUT;
-        echo $html;
-        
-        
-        
-/*        $html = <<<"OUTPUT"
-        <article id="form">
-            <div class="articleHeader">
-                <h2 class="basic">Contact Me</h2>
-            </div>
-            <form action="https://titan.csit.rmit.edu.au/~e54061/wp/testcontact.php" method="POST">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email">
-                <label for="mobile">Mobile</label>
-                <input type="subject" id="mobile" name="mobile" placeholder="Mobile">
-                <label for="subject">Subject</label>
-                <input type="message" id="subject" name="subject" placeholder="Subject">
-                <label class="messageField" for="message">Message</label>
-                <textarea class="messageField basic" id="message" name="message" cols='80' rows='9'></textarea>
-                <input class="checkBox" type="checkbox" id="rememberMe" name="remember-me">
-                <label class="checkBoxLabel" for="rememberMe">Remember me</label>
-                <input type="submit" name="send" value="Submit">
-            </form>
-        </article>
-OUTPUT;
-        echo $html;*/
+        </article>";
     } else {
         
         foreach($lettersArray as $key) {
@@ -236,11 +223,16 @@ OUTPUT;
                     }
                 echo "</div>
                 <div class=\"".$lettersArray[$articleID][Type]."\">
-                    <div>".$lettersArray[$articleID][Type]." placeholder cover text</div>
-                    <div><p>".str_replace("\n", "</p><p>", $lettersArray[$articleID][Content])."</p></div>
-                </div>
+                    <div></div>
+                    <div><p>".str_replace("\n", "</p><p>", $lettersArray[$articleID][Content])."</p></div>";
+                        if($lettersArray[$articleID][Type] == 'Letter') {
+                            echo "<div></div>";
+                        }
+                echo "</div>
             </article>";
     }
 }
+        
+//echo "test (".$formData["name"].") endtest";
 
 ?>

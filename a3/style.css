@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 h1 {
 	font-family: WWIStencil;
     color: #000C;
@@ -175,7 +179,7 @@ article {
 	width: 100%;
 	margin: 0;
 	padding: 0;
-    z-index: 1;
+    z-index: 2;
 }
 
 .articleHeader a {
@@ -197,10 +201,6 @@ article {
 	text-shadow: 0 0 5px #fff;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 .floatLeft {
     float: left;
 }
@@ -217,7 +217,7 @@ article form {
     width: 420px;
     margin: 5% auto;
     display: grid;
-    grid-template-columns: 80px 20px 300px;
+    grid-template-columns: 80px 20px 300px 200px;
     grid-gap: 10px;
     align-content: center;
 }
@@ -258,6 +258,10 @@ article label {
 	font-size: 20px;
 }
 
+.error {
+    color: #f00;
+}
+
 footer {
     font-family: basic;
 	height: 80px;
@@ -288,7 +292,10 @@ footer {
 
 .Postcard div:nth-child(1) {
     transform: rotateY(0deg);
-    background-color: #fff;
+    /*Original image sourced for educational purposes:
+    https://i.ebayimg.com/00/s/MTA0MFgxNTg4/z/GQoAAOSwzThcDMvm/$_10.JPG?set_id=880000500F*/
+    background-image: url('../../media/Postcard.jpeg');
+    background-size:100% 100%;
 }
 
 .Postcard:hover div:nth-child(1) {
@@ -297,12 +304,15 @@ footer {
 
 .Postcard div:nth-child(2) {
     transform: rotateY(180deg);
-    color: #000C;
-	font-family: handwritten;
-    font-size: 30px;
     /*Original image sourced for educational purposes:
     https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
+}
+
+.Postcard * {
+    color: #000C;
+	font-family: handwritten;
+    font-size: 30px;
     overflow: auto;
 }
 
@@ -313,14 +323,18 @@ footer {
 .Letter div:nth-child(1) {
     transform: rotateX(0deg);
     transform-origin: bottom;
-    background-color: #fff;
+    /*Original image sourced for educational purposes:
+    http://olddesignshop.com/wp-content/uploads/2013/08/OldDesignShop_EnvelopeBack1887.jpg*/
+    background-color: #FDA;
+    background-image: url('../../media/Envelope Bottom.png');
+    background-size:100% 100%;
     z-index: 1;
 }
 
 .Letter:hover div:nth-child(1) {
     transform: rotateX(90deg);
     transform-origin: bottom;
-    background-color: #fff0;
+    opacity: 0;
 }
 
 .Letter div:nth-child(2) {
@@ -330,6 +344,29 @@ footer {
     /*Original image sourced for educational purposes:
     https://depositphotos.com/31532283/stock-photo-seamless-paper-texture.html*/
     background-image: url('../../media/Paper texture.png');
+    overflow: auto;
+}
+
+.Letter div:nth-child(3) {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    /*Original image sourced for educational purposes:
+    http://olddesignshop.com/wp-content/uploads/2013/08/OldDesignShop_EnvelopeBack1887.jpg*/
+    background-image: url('../../media/Envelope Top.png');
+    background-size:100% 100%;
+    z-index: 1;
+}
+
+.Letter:hover div:nth-child(3) {
+    transform: rotateX(90deg);
+    transform-origin: top;
+    opacity: 0;
+}
+
+.Letter * {
+    color: #000C;
+	font-family: handwritten;
+    font-size: 30px;
     overflow: auto;
 }
 
@@ -363,7 +400,7 @@ footer {
         position: fixed;
         top: 35%;
         background-color: #FDA;
-        z-index: 2;
+        z-index: 3;
         border-style: solid solid solid none;
         border-color: #653;
         border-radius: 0 20px 20px 0;

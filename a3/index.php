@@ -1,10 +1,9 @@
 <?php
     session_start();
+    require_once('post-validation.php');
     require_once('tools.php');
     topModule();
     navModule();
+    articleBuilder();
+    endModule();
 ?>
-
-<?= articleBuilder(); ?>
-
-<?= endModule(); ?>
