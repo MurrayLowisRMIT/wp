@@ -150,6 +150,15 @@ nav li li input:hover {
 	text-shadow: 0 0 5px #000;
 }
 
+div.login {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: auto;
+	margin: 0;
+    padding: 20px;
+}
+
 .collapsibleContent {
     max-height: 0;
     transition: max-height 0.2s ease-out;

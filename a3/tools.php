@@ -37,11 +37,9 @@ function endModule() {
             <footer>
                 <div>&copy;<script>document.write(new Date().getFullYear());</script>
                     <noscript>2020</noscript>
-                    Murray Lowis, S3862651. Last modified ";
-
-    date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME']));
-
-    echo "          <br>
+                    Murray Lowis, S3862651. Last modified "
+                    .date("Y F d  H:i", filemtime($_SERVER['SCRIPT_FILENAME'])).
+                    "<br>
                     <a href=\"https://github.com/MurrayLowisRMIT/wp/tree/main/a2\">https://github.com/MurrayLowisRMIT/wp/tree/main/a3</a>
                 </div>
                 <div>
@@ -68,6 +66,26 @@ if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r"
     }
     flock($lettersCSV, LOCK_UN);
     fclose($lettersCSV);} else { echo "File unavailable, my disappointment is immeasurable and my day is ruined";
+}
+
+function loginModule() {
+        /*echo "<div class=\"login\">
+            <form action=\"login.php\" method=\"GET\">
+                <input type=\"submit\" value=\"Log in\">
+            </form>
+        </div>";*/
+    
+        echo "<div class=\"login\">";
+                if(!empty($_COOKIE["logIn"])) {
+                    echo "<form action=\"login.php\" method=\"POST\">
+                        <input type=\"submit\" name=\"logOff\" value=\"Sign out\"><br>
+                        <input type=\"submit\" name=\"editLetters\" value=\"Edit letters\">";
+                } else {
+                    echo "<form action=\"login.php\" method=\"GET\">
+                        <input type=\"submit\" value=\"Sign in\">";
+                }
+            echo "</form>
+        </div>";
 }
 
 function navModule() {
@@ -125,7 +143,6 @@ function navModule() {
 
 function articleBuilder() {
     global $lettersArray;    
-    global $formData;
     global $errors;
     
     foreach($lettersArray as $line) {
@@ -168,29 +185,27 @@ OUTPUT;
                         echo "\" value=\"".$_COOKIE["name"];
                     }
                 echo "\">
-                <p class =\"error\">".$errors['name']."</p>
+                <p class =\"error\">".$_POST["errors"]['name']."</p>
                 <label for=\"email\">Email</label>
                 <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
                 if(!empty($_COOKIE["email"])) {
                         echo "\" value=\"".$_COOKIE["email"];
                     }
                 echo "\">
-                <p class =\"error\">".$errors['email']."</p>
+                <p class =\"error\">".$_POST["errors"]['email']."</p>
                 <label for=\"mobile\">Mobile</label>
                 <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
                 if(!empty($_COOKIE["mobile"])) {
                         echo "\" value=\"".$_COOKIE["mobile"];
                     }
                 echo "\">
-                <p class =\"error\">".$errors['mobile']."</p>
+                <p class =\"error\">".$_POST["errors"]['mobile']."</p>
                 <label for=\"subject\">Subject</label>
                 <input type=\"message\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
-                <p class =\"error\">".$errors['subject']."</p>
+                <p class =\"error\">".$_POST["errors"]['subject']."</p>
                 <label class=\"messageField\" for=\"message\">Message</label>
                 <textarea class=\"messageField basic\" id=\"message\" name=\"message\" cols='80' rows='9'></textarea>
-                <p class =\"error\">".$errors['message']."</p>
-                <input class=\"checkBox\" type=\"checkbox\" id=\"rememberMe\" name=\"rememberMe\">
-                <label class=\"checkBoxLabel\" for=\"rememberMe\">Remember me</label>
+                <p class =\"error\">".$_POST["errors"]['message']."</p>
                 <input type=\"submit\" name=\"send\" value=\"Submit\">
             </form>
         </article>";
@@ -232,7 +247,54 @@ OUTPUT;
             </article>";
     }
 }
-        
-//echo "test (".$formData["name"].") endtest";
+
+function loginPage() {
+    echo "<main>
+        <article>
+            <div class=\"articleHeader\">
+                <h2>Log in</h2>
+            </div>
+            
+            <div class=\"loginForm\">";
+                echo "<form action=\"post-validation.php\" method=\"POST\">
+                    <label for=\"name\">Name</label>
+                    <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
+                    if(!empty($_COOKIE["name"])) {
+                            echo "\" value=\"".$_COOKIE["name"];
+                        }
+                    echo "\">
+                    <p class =\"error\">".$_POST["errors"]['name']."</p>
+                    <label for=\"name\">Password</label>
+                    <input type=\"text\" id=\"password\" name=\"password\" placeholder=\"Password\"";
+                    if(!empty($_COOKIE["password"])) {
+                            echo "\" value=\"".$_COOKIE["password"];
+                        }
+                    echo "\">
+                    <p class =\"error\">".$_POST["errors"]['password']."</p>
+                    <label for=\"email\">Email</label>
+                    <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
+                    if(!empty($_COOKIE["email"])) {
+                            echo "\" value=\"".$_COOKIE["email"];
+                        }
+                    echo "\">
+                    <p class =\"error\">".$_POST["errors"]['email']."</p>
+                    <label for=\"mobile\">Mobile</label>
+                    <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
+                    if(!empty($_COOKIE["mobile"])) {
+                            echo "\" value=\"".$_COOKIE["mobile"];
+                        }
+                    echo "\">
+                    <p class =\"error\">".$_POST["errors"]['mobile']."</p>
+                    <input class=\"checkBox\" type=\"checkbox\" id=\"rememberMe\" name=\"rememberMe\">
+                    <label class=\"checkBoxLabel\" for=\"rememberMe\">Remember me</label>
+                    <input type=\"submit\" name=\"logIn\" value=\"Log in\">
+                    <input type=\"submit\" name=\"back\" value=\"Back\">
+                </form>
+            </div>
+        </article>";
+    
+    echo "test1 (".$_POST["errors"]['errorCount'].") test<br>";
+    echo "test2 (".$_POST["name"].") test";
+}
 
 ?>
