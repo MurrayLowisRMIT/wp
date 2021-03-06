@@ -1,6 +1,5 @@
 <?php
 
-//Contents were being output correctly, but were also including notices about unset variables for some reason so reporting is disabled
 error_reporting(0);
 
 function topModule() {
@@ -25,10 +24,16 @@ function topModule() {
             https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
             <img class="floatLeft headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
-            <h1>ANZAC Douglas Raymond Baker<br><small>Letters Home</small></h1>
-        </header>
+            <h1>ANZAC Douglas Raymond Baker
 OUTPUT;
     echo $html;
+    
+    if($_SERVER['PHP_SELF'] === "/index.php") {
+        echo "<br><small>Letters Home</small>";
+    }
+    
+    echo "</h1></header>";
+    
 }
 
 function endModule() {
@@ -52,9 +57,7 @@ function endModule() {
     </html>";
 }
 
-//swap this line in for the  one below it when done testing!!!
 if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
-//if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
     $headings = fgetcsv($lettersCSV, 0, "\t");
     
     $articleID = 0;
@@ -65,24 +68,32 @@ if (($lettersCSV = fopen("/home/eh1/e54061/public_html/wp/letters-home.txt", "r"
         $articleID += 1;
     }
     flock($lettersCSV, LOCK_UN);
-    fclose($lettersCSV);} else { echo "File unavailable, my disappointment is immeasurable and my day is ruined";
+    fclose($lettersCSV);
+} else if (($lettersCSV = fopen("letters-home.txt", "r")) && flock($lettersCSV, LOCK_SH) !== false) {
+    //Uses local copy in case file on server is unavailable
+    $headings = fgetcsv($lettersCSV, 0, "\t");
+    
+    $articleID = 0;
+    while(($line = fgetcsv($lettersCSV, 0, "\t")) !== false) {
+        $lineAssociative = array_combine($headings, $line);
+        $lineAssociative["ArticleID"]=$articleID;
+        $lettersArray[] = $lineAssociative;
+        $articleID += 1;
+    }
+    flock($lettersCSV, LOCK_UN);
+    fclose($lettersCSV);
+} else {
+    echo "File somehow unavailable. My disappointment is immeasurable and my day is ruined";
 }
 
-function loginModule() {
-        /*echo "<div class=\"login\">
-            <form action=\"login.php\" method=\"GET\">
-                <input type=\"submit\" value=\"Log in\">
-            </form>
-        </div>";*/
-    
-        echo "<div class=\"login\">";
+function loginModule() {    
+        echo "<div class=\"login\">
+                <form action=\"login.php\" method=\"POST\">";
                 if(!empty($_COOKIE["logIn"])) {
-                    echo "<form action=\"login.php\" method=\"POST\">
-                        <input type=\"submit\" name=\"logOff\" value=\"Sign out\"><br>
+                    echo "<input type=\"submit\" name=\"logOff\" value=\"Sign out\"><br>
                         <input type=\"submit\" name=\"editLetters\" value=\"Edit letters\">";
                 } else {
-                    echo "<form action=\"login.php\" method=\"GET\">
-                        <input type=\"submit\" value=\"Sign in\">";
+                    echo "<input type=\"submit\" name=\"goToLogIn\" value=\"Sign in\">";
                 }
             echo "</form>
         </div>";
@@ -142,7 +153,8 @@ function navModule() {
 }
 
 function articleBuilder() {
-    global $lettersArray;    
+    global $lettersArray;
+    global $formData;
     global $errors;
     
     foreach($lettersArray as $line) {
@@ -185,27 +197,27 @@ OUTPUT;
                         echo "\" value=\"".$_COOKIE["name"];
                     }
                 echo "\">
-                <p class =\"error\">".$_POST["errors"]['name']."</p>
+                <p class =\"error\">".$errors['name']."</p>
                 <label for=\"email\">Email</label>
                 <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
                 if(!empty($_COOKIE["email"])) {
                         echo "\" value=\"".$_COOKIE["email"];
                     }
                 echo "\">
-                <p class =\"error\">".$_POST["errors"]['email']."</p>
+                <p class =\"error\">".$errors['email']."</p>
                 <label for=\"mobile\">Mobile</label>
                 <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
                 if(!empty($_COOKIE["mobile"])) {
                         echo "\" value=\"".$_COOKIE["mobile"];
                     }
                 echo "\">
-                <p class =\"error\">".$_POST["errors"]['mobile']."</p>
+                <p class =\"error\">".$errors['mobile']."</p>
                 <label for=\"subject\">Subject</label>
                 <input type=\"message\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
-                <p class =\"error\">".$_POST["errors"]['subject']."</p>
+                <p class =\"error\">".$errors['subject']."</p>
                 <label class=\"messageField\" for=\"message\">Message</label>
                 <textarea class=\"messageField basic\" id=\"message\" name=\"message\" cols='80' rows='9'></textarea>
-                <p class =\"error\">".$_POST["errors"]['message']."</p>
+                <p class =\"error\">".$errors['message']."</p>
                 <input type=\"submit\" name=\"send\" value=\"Submit\">
             </form>
         </article>";
@@ -249,52 +261,61 @@ OUTPUT;
 }
 
 function loginPage() {
+    global $formData;
+    global $errors;
+    
     echo "<main>
         <article>
             <div class=\"articleHeader\">
-                <h2>Log in</h2>
+                <h2>Sign in</h2>
             </div>
             
             <div class=\"loginForm\">";
                 echo "<form action=\"post-validation.php\" method=\"POST\">
                     <label for=\"name\">Name</label>
                     <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
-                    if(!empty($_COOKIE["name"])) {
-                            echo "\" value=\"".$_COOKIE["name"];
+                        if(!empty($formData["name"])) {
+                            echo " value=\"".$formData["name"]."\"";
+                        } else {
+                            echo " value=\"".$_POST["name"]."\"";
                         }
-                    echo "\">
-                    <p class =\"error\">".$_POST["errors"]['name']."</p>
-                    <label for=\"name\">Password</label>
+                        echo ">
+                    <p class=\"error\">".$errors['name']."</p>
+                    <label for=\"password\">Password</label>
                     <input type=\"text\" id=\"password\" name=\"password\" placeholder=\"Password\"";
-                    if(!empty($_COOKIE["password"])) {
-                            echo "\" value=\"".$_COOKIE["password"];
+                        if(!empty($formData["password"])) {
+                            echo " value=\"".$formData["password"]."\"";
+                        } else {
+                            echo " value=\"".$_POST["password"]."\"";
                         }
-                    echo "\">
-                    <p class =\"error\">".$_POST["errors"]['password']."</p>
+                        echo ">
+                    <p class=\"error\">".$errors['password']."</p>
                     <label for=\"email\">Email</label>
                     <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
-                    if(!empty($_COOKIE["email"])) {
-                            echo "\" value=\"".$_COOKIE["email"];
+                        if(!empty($formData["email"])) {
+                            echo " value=\"".$formData["email"]."\"";
+                        } else {
+                            echo " value=\"".$_POST["email"]."\"";
                         }
-                    echo "\">
-                    <p class =\"error\">".$_POST["errors"]['email']."</p>
+                        echo ">
+                    <p class=\"error\">".$errors['email']."</p>
                     <label for=\"mobile\">Mobile</label>
                     <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
-                    if(!empty($_COOKIE["mobile"])) {
-                            echo "\" value=\"".$_COOKIE["mobile"];
+                        if(!empty($formData["name"])) {
+                            echo " value=\"".$formData["mobile"]."\"";
+                        } else {
+                            echo " value=\"".$_POST["mobile"]."\"";
                         }
-                    echo "\">
-                    <p class =\"error\">".$_POST["errors"]['mobile']."</p>
+                        echo ">
+                    <p class=\"error\">".$errors['mobile']."</p>
                     <input class=\"checkBox\" type=\"checkbox\" id=\"rememberMe\" name=\"rememberMe\">
                     <label class=\"checkBoxLabel\" for=\"rememberMe\">Remember me</label>
                     <input type=\"submit\" name=\"logIn\" value=\"Log in\">
                     <input type=\"submit\" name=\"back\" value=\"Back\">
+    
                 </form>
             </div>
         </article>";
-    
-    echo "test1 (".$_POST["errors"]['errorCount'].") test<br>";
-    echo "test2 (".$_POST["name"].") test";
 }
 
 ?>
