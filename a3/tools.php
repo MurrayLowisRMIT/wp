@@ -1,5 +1,4 @@
 <?php
-
 error_reporting(0);
 
 function topModule() {
@@ -24,16 +23,10 @@ function topModule() {
             https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
             <img class="floatLeft headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
-            <h1>ANZAC Douglas Raymond Baker
+            <h1>ANZAC Douglas Raymond Baker</h1>
+        </header>
 OUTPUT;
     echo $html;
-    
-    if($_SERVER['PHP_SELF'] === "/index.php") {
-        echo "<br><small>Letters Home</small>";
-    }
-    
-    echo "</h1></header>";
-    
 }
 
 function endModule() {
@@ -93,7 +86,7 @@ function loginModule() {
                     echo "<input type=\"submit\" name=\"logOff\" value=\"Sign out\"><br>
                         <input type=\"submit\" name=\"editLetters\" value=\"Edit letters\">";
                 } else {
-                    echo "<input type=\"submit\" name=\"goToLogIn\" value=\"Sign in\">";
+                    echo "<input type=\"submit\" value=\"Sign in\">";
                 }
             echo "</form>
         </div>";
@@ -192,25 +185,13 @@ OUTPUT;
             </div>
             <form action=\"post-validation.php\" method=\"POST\">
                 <label for=\"name\">Name</label>
-                <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
-                if(!empty($_COOKIE["name"])) {
-                        echo "\" value=\"".$_COOKIE["name"];
-                    }
-                echo "\">
+                <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\">
                 <p class =\"error\">".$errors['name']."</p>
                 <label for=\"email\">Email</label>
-                <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
-                if(!empty($_COOKIE["email"])) {
-                        echo "\" value=\"".$_COOKIE["email"];
-                    }
-                echo "\">
+                <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\">
                 <p class =\"error\">".$errors['email']."</p>
                 <label for=\"mobile\">Mobile</label>
-                <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
-                if(!empty($_COOKIE["mobile"])) {
-                        echo "\" value=\"".$_COOKIE["mobile"];
-                    }
-                echo "\">
+                <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\">
                 <p class =\"error\">".$errors['mobile']."</p>
                 <label for=\"subject\">Subject</label>
                 <input type=\"message\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
@@ -271,7 +252,7 @@ function loginPage() {
             </div>
             
             <div class=\"loginForm\">";
-                echo "<form action=\"post-validation.php\" method=\"POST\">
+                echo "<form action=\"post-validation.php\" method=\"POST\" onsubmit=\"return validateForm();\">
                     <label for=\"name\">Name</label>
                     <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
                         if(!empty($formData["name"])) {
@@ -280,7 +261,7 @@ function loginPage() {
                             echo " value=\"".$_POST["name"]."\"";
                         }
                         echo ">
-                    <p class=\"error\">".$errors['name']."</p>
+                    <p class=\"error\" id=\"errorName\"></p>
                     <label for=\"password\">Password</label>
                     <input type=\"text\" id=\"password\" name=\"password\" placeholder=\"Password\"";
                         if(!empty($formData["password"])) {
@@ -289,7 +270,7 @@ function loginPage() {
                             echo " value=\"".$_POST["password"]."\"";
                         }
                         echo ">
-                    <p class=\"error\">".$errors['password']."</p>
+                    <p class=\"error\" id=\"errorPassword\"></p>
                     <label for=\"email\">Email</label>
                     <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
                         if(!empty($formData["email"])) {
@@ -298,24 +279,34 @@ function loginPage() {
                             echo " value=\"".$_POST["email"]."\"";
                         }
                         echo ">
-                    <p class=\"error\">".$errors['email']."</p>
+                    <p class=\"error\" id=\"errorEmail\"></p>
                     <label for=\"mobile\">Mobile</label>
-                    <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
+                    <input type=\"text\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
                         if(!empty($formData["name"])) {
                             echo " value=\"".$formData["mobile"]."\"";
                         } else {
                             echo " value=\"".$_POST["mobile"]."\"";
                         }
                         echo ">
-                    <p class=\"error\">".$errors['mobile']."</p>
+                    <p class=\"error\" id=\"errorMobile\"></p>
                     <input class=\"checkBox\" type=\"checkbox\" id=\"rememberMe\" name=\"rememberMe\">
                     <label class=\"checkBoxLabel\" for=\"rememberMe\">Remember me</label>
                     <input type=\"submit\" name=\"logIn\" value=\"Log in\">
-                    <input type=\"submit\" name=\"back\" value=\"Back\">
-    
+                </form>
+                <form action=\"index.php\">
+                    <input type=\"submit\" value=\"Back\">
                 </form>
             </div>
         </article>";
+}
+
+function contactForm() {
+    if(($messages = fopen($filename,"a")) && flock($messages, LOCK_EX) !== false) {
+        foreach ($records as $record)
+            fputcsv($messages, $record, "\t");
+        flock($messages, LOCK_UN);
+        fclose($messages);
+    }
 }
 
 ?>

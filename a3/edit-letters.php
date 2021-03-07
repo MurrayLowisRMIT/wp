@@ -14,8 +14,8 @@ if(!isset($_COOKIE["logIn"])) {
                 </div>
 
                 <div class=\"loginForm\">";
-                    echo "<form action=\"post-validation.php\" method=\"POST\">
-                        <input type=\"submit\" name=\"back\" value=\"Back\">
+                    echo "<form action=\"index.php\">
+                        <input type=\"submit\" value=\"Back\">
                     </form>
                 </div>
             </article>";

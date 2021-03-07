@@ -1,7 +1,7 @@
 <?php
 error_reporting(0);
 
-//Had trouble getting this to behave properly (i.e. only load up after a failed log in)
+//Having trouble getting this to behave properly (i.e. only load up after a failed log in)
 $errors = [
     "name" => "",
     "password" => "",
@@ -17,12 +17,10 @@ $formData = [
     "password" => "",
     "email" => "",
     "mobile" => ""
-];  
+];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     if (!empty($_POST["logOff"])) {
-        unset($_POST["logOff"]);
         setcookie("logIn", "", time() - 3600);
         setcookie("name", "", time() - 3600);
         setcookie("password", "", time() - 3600);
@@ -53,13 +51,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     //Couldn't figure out how to get this thing to behave after clicking the "Log in" button - keeps overwriting the $formData and $errors arrays
     if (!empty($_POST["logIn"])) {
-        unset($_POST["logIn"]);
-
         if ($errors["errorCount"] == 0) {
             setcookie("logIn", "true", time() + 3600);
 
             if (!empty($_POST["rememberMe"])) {
-                unset($_POST["rememberMe"]);
                 setcookie("name", sanitise($_POST["name"]), time() + 3600);
                 setcookie("email", sanitise($_POST["email"]), time() + 3600);
                 setcookie("mobile", sanitise($_POST["mobile"]), time() + 3600);
@@ -72,17 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (!empty($_POST["back"])) {
-        unset($_POST["back"]);
         header("Location: index.php");
     }
 
     if (!empty($_POST["editLetters"])) {
-        unset($_POST["editLetters"]);
         header("Location: edit-letters.php");
     }
 
     if(!empty($_POST["send"])) {
-        unset($_POST["send"]);
         header("Location: " . $_SERVER["HTTP_REFERER"]);
     }
 }
