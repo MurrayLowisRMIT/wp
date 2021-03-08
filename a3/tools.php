@@ -2,31 +2,32 @@
 error_reporting(0);
 
 function topModule() {
-    $html = <<<"OUTPUT"
-    <!DOCTYPE html>
+    global $storage;
+    
+    echo "<!DOCTYPE html>
     <html>
         <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="author" content="Murray Lowis">
+        <meta charset=\"utf-8\">
+        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
+        <meta name=\"author\" content=\"Murray Lowis\">
         <title>ANZAC Douglas Raymond Baker Letters Home</title>
-        <link id='wireframecss' type="text/css" rel="stylesheet" href="../wireframe.css" disabled>
-        <link id='stylecss' type="text/css" rel="stylesheet" href="style.css?t= filemtime("style.css"); ?>
-        <link rel="icon" href="../../media/ANZAC Crest.png" type="image/x-icon">
-        <script type="text/javascript" src="tools.js"></script>
-        <script src='../wireframe.js'></script>
-    </head>
+        <link id='wireframecss' type=\"text/css\" rel=\"stylesheet\" href=\"../wireframe.css\" disabled>
+        <link id='stylecss' type=\"text/css\" rel=\"stylesheet\" href=\"style.css?t= filemtime(\"style.css\"); ?>
+        <link rel=\"icon\" href=\"../../media/ANZAC Crest.png\" type=\"image/x-icon\">
+        <script type=\"text/javascript\" src=\"tools.js\"></script>
+        <script src='../wireframe.js'></script>"
+        //This is where the localStorage would have been output if I could get post-validation.php to work
+        .$storage.
+        "</head>
 
     <body>
-        <header  id="0">
+        <header>
             <!--Original image sourced for educational purposes:
             https://ranzcrarchivesblog.wordpress.com/2015/04/13/anzac-images-radiology-at-gallipoli/-->
-            <img class="floatLeft headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
-            <img class="floatRight headerimg" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
+            <img class=\"floatLeft headerimg\" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
+            <img class=\"floatRight headerimg\" src='../../media/ANZAC Crest.png' alt='ANZAC crest'>
             <h1>ANZAC Douglas Raymond Baker</h1>
-        </header>
-OUTPUT;
-    echo $html;
+        </header>";
 }
 
 function endModule() {
@@ -83,7 +84,8 @@ function loginModule() {
         echo "<div class=\"login\">
                 <form action=\"login.php\" method=\"POST\">";
                 if(!empty($_COOKIE["logIn"])) {
-                    echo "<input type=\"submit\" name=\"logOff\" value=\"Sign out\"><br>
+                    echo "<p>".$_COOKIE["name"]."</p>
+                        <input type=\"submit\" name=\"logOff\" value=\"Sign out\">
                         <input type=\"submit\" name=\"editLetters\" value=\"Edit letters\">";
                 } else {
                     echo "<input type=\"submit\" value=\"Sign in\">";
@@ -150,6 +152,7 @@ function articleBuilder() {
     global $formData;
     global $errors;
     
+    //Array for menu headings
     foreach($lettersArray as $line) {
         $year = substr($line[DateStart], 0, 4);
         if(!in_array($year, $years)) {
@@ -158,6 +161,7 @@ function articleBuilder() {
     }
 
     if ($_GET["articleID"] === "Foreword" or empty($_GET["articleID"])) {
+        //Foreword
         $html = <<<"OUTPUT"
         <article class="foreword">
             <div class="articleHeader">
@@ -179,31 +183,50 @@ function articleBuilder() {
 OUTPUT;
         echo $html;
     } else if ($_GET["articleID"] === "Contact me") {
-        echo "<article id=\"form\">
+        //Contact form
+        echo "<article>
             <div class=\"articleHeader\">
                 <h2 class=\"basic\">Contact Me</h2>
             </div>
-            <form action=\"post-validation.php\" method=\"POST\">
+            <form action=\"post-validation.php\" method=\"POST\" onsubmit=\"return validateContactForm();\">
                 <label for=\"name\">Name</label>
-                <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\">
-                <p class =\"error\">".$errors['name']."</p>
+                <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
+                    if(!empty($formData["name"])) {
+                        echo " value=\"".$formData["name"]."\"";
+                    } else {
+                        echo " value=\"".$_POST["name"]."\"";
+                    }
+                    echo ">
+                <p class=\"error\" id=\"errorName\"></p>
                 <label for=\"email\">Email</label>
-                <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\">
-                <p class =\"error\">".$errors['email']."</p>
+                <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Email\"";
+                    if(!empty($formData["email"])) {
+                        echo " value=\"".$formData["email"]."\"";
+                    } else {
+                        echo " value=\"".$_POST["email"]."\"";
+                    }
+                    echo ">
+                <p class=\"error\" id=\"errorEmail\"></p>
                 <label for=\"mobile\">Mobile</label>
-                <input type=\"subject\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\">
-                <p class =\"error\">".$errors['mobile']."</p>
+                <input type=\"text\" id=\"mobile\" name=\"mobile\" placeholder=\"Mobile\"";
+                    if(!empty($formData["name"])) {
+                        echo " value=\"".$formData["mobile"]."\"";
+                    } else {
+                        echo " value=\"".$_POST["mobile"]."\"";
+                    }
+                    echo ">
+                <p class=\"error\" id=\"errorMobile\"></p>
                 <label for=\"subject\">Subject</label>
-                <input type=\"message\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
-                <p class =\"error\">".$errors['subject']."</p>
+                <input type=\"text\" id=\"subject\" name=\"subject\" placeholder=\"Subject\">
+                <p class=\"error\" id=\"errorSubject\"></p>
                 <label class=\"messageField\" for=\"message\">Message</label>
                 <textarea class=\"messageField basic\" id=\"message\" name=\"message\" cols='80' rows='9'></textarea>
-                <p class =\"error\">".$errors['message']."</p>
+                <p class=\"error\" id=\"errorMessage\"></p>
                 <input type=\"submit\" name=\"send\" value=\"Submit\">
             </form>
         </article>";
     } else {
-        
+        //Articles
         foreach($lettersArray as $key) {
             if ($key[DateStart] == substr($_GET["articleID"],-10)) {
                 $articleID = $key[ArticleID];
@@ -251,8 +274,8 @@ function loginPage() {
                 <h2>Sign in</h2>
             </div>
             
-            <div class=\"loginForm\">";
-                echo "<form action=\"post-validation.php\" method=\"POST\" onsubmit=\"return validateForm();\">
+            <div class=\"loginForm\">
+                <form action=\"post-validation.php\" method=\"POST\" onsubmit=\"return validateForm();\">
                     <label for=\"name\">Name</label>
                     <input type=\"text\" id=\"name\" name=\"name\" placeholder=\"Name\"";
                         if(!empty($formData["name"])) {
@@ -300,10 +323,11 @@ function loginPage() {
         </article>";
 }
 
+//This is where the mail.txt would have been written with contact form messages if I could get the form-validation.php form submission to behave
 function contactForm() {
     if(($messages = fopen($filename,"a")) && flock($messages, LOCK_EX) !== false) {
-        foreach ($records as $record)
-            fputcsv($messages, $record, "\t");
+        foreach ($message as $value)
+            fputcsv($messages, $value, "\t");
         flock($messages, LOCK_UN);
         fclose($messages);
     }

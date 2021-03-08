@@ -30,6 +30,27 @@ function validateForm() {
     return (countErrors==0);
 }
 
+function validateContactForm() {
+    clearErrors();
+    var countErrors=0;
+    if (!nameCheck()) {
+        countErrors++;
+    } 
+    if (!emailCheck()) {
+        countErrors++;
+    } 
+    if (!mobileCheck()) {
+        countErrors++;
+    } 
+    if (!subjectCheck()) {
+        countErrors++;
+    }
+    if (!messageCheck()) {
+        countErrors++;
+    }
+    return (countErrors==0);
+}
+
 function clearErrors() {
     var allErrors = document.getElementsByClassName('error');
     for (var i = 0; i < allErrors.length; i++) {
@@ -81,6 +102,26 @@ function mobileCheck() {
     } else {
         document.getElementById('errorMobile').innerHTML="Mobile numbers must be Australian (numbers only)";
         return false;
+    }
+}
+
+function subjectCheck() {
+    var subject=document.getElementById('subject').value;
+    if (subject[0] == null) {
+        document.getElementById('errorSubject').innerHTML="Please include a subject";
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function messageCheck() {
+    var message=document.getElementById('message').value;
+    if (message[0] == null) {
+        document.getElementById('errorMessage').innerHTML="Please include a message";
+        return false;
+    } else {
+        return true;
     }
 }
 

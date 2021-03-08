@@ -66,6 +66,54 @@ header {
     overflow: auto;
 }
 
+div.login form {
+    background-color: #FDA;
+    border-style: solid;
+    border-color: #653;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px #0003;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: auto;
+	margin: 20px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 0;
+    z-index: 3;
+}
+
+div.login form * {
+	font-family: basic;
+    color: #000;
+	margin: 0;
+    padding: 0;
+}
+
+div.login form p {
+    grid-column: 1/ span 2;
+    font-size: 20px;
+    text-align: center;
+}
+
+div.login form input {
+    display: block;
+    width: auto;
+    margin: 5px;
+    padding: 3px;
+    font-size: 15px;
+    background-color: #FDA;
+    border-style: solid;
+    border-radius: 3px;
+    border-color: #653;
+}
+
+div.login form input:hover {
+    background-color: #653;
+    color: #FEC;
+}
+
 nav {
     position: sticky;
     top: 50px;
@@ -148,15 +196,6 @@ nav input:hover, .button:hover, nav .active:hover, nav li li input:hover {
 
 nav li li input:hover {
 	text-shadow: 0 0 5px #000;
-}
-
-div.login {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: auto;
-	margin: 0;
-    padding: 20px;
 }
 
 .collapsibleContent {
@@ -407,7 +446,7 @@ footer {
     
     nav {
         position: fixed;
-        top: 35%;
+        top: 25%;
         background-color: #FDA;
         z-index: 3;
         border-style: solid solid solid none;

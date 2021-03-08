@@ -1,7 +1,8 @@
 <?php
+//60+ hours later I still cannot for the life of me get this page to output correctly upon form submission
+
 error_reporting(0);
 
-//Having trouble getting this to behave properly (i.e. only load up after a failed log in)
 $errors = [
     "name" => "",
     "password" => "",
@@ -20,6 +21,7 @@ $formData = [
 ];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    //this was written before the notice that localStorage was to be used instead of cookies - ran out of time to migrate to localStorage
     if (!empty($_POST["logOff"])) {
         setcookie("logIn", "", time() - 3600);
         setcookie("name", "", time() - 3600);
@@ -49,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $formData["mobile"] = sanitise($_POST["mobile"]);
 
-    //Couldn't figure out how to get this thing to behave after clicking the "Log in" button - keeps overwriting the $formData and $errors arrays
     if (!empty($_POST["logIn"])) {
         if ($errors["errorCount"] == 0) {
             setcookie("logIn", "true", time() + 3600);
@@ -64,6 +65,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             header("Location: " . $_SERVER["HTTP_REFERER"]);
         }     
+    }
+    
+    //Could not get this to work in time
+    if (!empty($_POST["send"])) {
+        /*$storage = echo "<script>
+            if (typeof(Storage) !== 'undefined') {
+                localStorage.setItem(\"name\",\"".$_POST['name']."\");
+            }
+        </script>";*/
+        header("Location: " . $_SERVER["HTTP_REFERER"]);     
     }
 
     if (!empty($_POST["back"])) {
